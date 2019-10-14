@@ -6,6 +6,45 @@ https://leetcode-cn.com/problems/rotate-array/
 https://leetcode-cn.com/problems/merge-two-sorted-lists/
 https://leetcode-cn.com/problems/merge-sorted-array/
 https://leetcode-cn.com/problems/two-sum/
+解法1
+```js
+var twoSum = function(nums, target) {
+    for (let i=0; i<nums.length; i++) {
+        for (let j=i+1; j<nums.length; j++) {
+           if (nums[i] + nums[j] === target) {
+               return [i,j]
+           } 
+        }
+    }
+};
+```
+解法2
+```js 
+var twoSum = function(nums, target) {
+    let map = new Map()
+    for (let i=0; i<nums.length; i++) {
+        map.set(nums[i], i)
+    }
+    
+    for (let j=0; j<nums.length; j++) {
+        const otherIndex = map.get(target - nums[j])
+        if (otherIndex !== undefined && otherIndex !== j) return [j, otherIndex]
+    }
+};
+```
+
+解法3
+```js
+var twoSum = function(nums, target) {
+    let map = new Map()
+    for (let i=0; i<nums.length; i++) {
+        const otherIndex = map.get(target - nums[i])
+        if (otherIndex !== undefined) return [otherIndex, i]
+        map.set(nums[i], i)
+    }
+};
+```
+
 https://leetcode-cn.com/problems/move-zeroes/
 
 解法1
