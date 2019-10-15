@@ -178,13 +178,123 @@ var threeSum = function(nums) {
 };
 ```
 
-链表
+### 链表
 
 https://leetcode.com/problems/reverse-linked-list/
+
+解法
+```js
+var reverseList = function(head) {
+    let currNode = head, preNode = null
+   
+    while (currNode) {
+       [currNode.next, preNode, currNode] = [preNode, currNode, currNode.next]
+    }
+    
+    return preNode
+};
+```
+
 https://leetcode.com/problems/swap-nodes-in-pairs
+
+解法
+```js
+var swapPairs = function(head) {
+   
+    let preNode = new ListNode(-1)
+    
+    preNode.next = head
+    
+    currNode = preNode
+    
+    while (currNode.next && currNode.next.next ) {
+        let a = currNode.next
+        let b = a.next
+        
+        currNode.next = b
+        a.next = b.next
+        b.next = a
+       
+        currNode = a
+    }
+    
+    return preNode.next
+    
+};
+```
+
 https://leetcode.com/problems/linked-list-cycle
+
+解法
+```js
+var hasCycle = function(head) {
+    
+    // 使用 set 集合
+    
+//     let currNode = head, set = new Set()
+    
+//     while (currNode) {
+//         if (set.has(currNode)) {
+//             return true
+//         }
+//         set.add(currNode)
+//         currNode = currNode.next
+//     }
+    
+//     return false
+    
+    // 使用快慢指针
+    
+    let fast = slow = head
+    
+    while (fast && fast.next ) {
+        
+        fast = fast.next.next
+        slow = slow.next
+        
+        if (fast === slow) {
+           return true 
+        }
+    }
+    
+    return false
+};
+```
+
 https://leetcode.com/problems/linked-list-cycle-ii
 https://leetcode.com/problems/reverse-nodes-in-k-group/
+
+```js
+var reverseKGroup = function(head, k) {
+    let preNode = new ListNode(-1)
+    let tmp = preNode
+    
+    while (true) {
+        let n = k, currNode = head, stack = []
+        
+        while (n && currNode) {
+            stack.push(currNode)
+            currNode = currNode.next
+            n--
+        }
+        
+        if (n !== 0 ) {
+            tmp.next = head
+            break
+        }
+        
+        while (stack.length) {
+            tmp.next = stack.pop()
+            tmp = tmp.next
+        }
+        
+        head = currNode
+    }
+    
+    return preNode.next
+        
+};
+```
 
 
 ## 第四课
