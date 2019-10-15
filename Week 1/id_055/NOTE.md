@@ -1,101 +1,7 @@
 # NOTE
 
 ## 第三课
-https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
-
-解法
-```
-var removeDuplicates = function(nums) {
-    if (nums.length == 0) return 0;
-    let i = 0;
-    for (let j = 1; j < nums.length; j++) {
-        if (nums[j] !== nums[i]) {
-            i++;
-            nums[i] = nums[j];
-        }
-    }
-    return i + 1;
-};
-```
-
-
-https://leetcode-cn.com/problems/rotate-array/
-
-解法1
-```js
-var rotate = function(nums, k) {
-    while (k) {
-        nums.unshift(nums.pop())
-        k--
-    }
-};
-```
-
-解法2
-```js
-var rotate = function(nums, k) {
-    let n = nums.length
-    
-    nums.reverse()
-    
-    let f = nums.splice(k, n - k)
-    
-    f.reverse()
-    
-    nums.reverse()
-    
-    f.forEach(num => nums.push(num)) 
-};
-```
-
-
-https://leetcode-cn.com/problems/merge-two-sorted-lists/
-
-解法
-```js
-var mergeTwoLists = function(l1, l2) {
-    
-    let preHead = new ListNode(-1)
-    
-    let pre = preHead
-    
-    while (l1 !== null && l2 !== null) {
-        if (l1.val > l2.val) {
-            pre.next = l2
-            l2 = l2.next
-        } else {
-            pre.next = l1
-            l1 = l1.next
-        }
-        pre = pre.next
-    }
-    
-    // 当一个有序链表遍历完毕后，将另一个链表，追加到新链表上
-    pre.next = l1 === null ? l2 : l1;
-    
-    return preHead.next
-};
-```
-
-https://leetcode-cn.com/problems/merge-sorted-array/
-
-解法
-// 1.合并，排序
-// 2.双指针 (注意边界问题，m = 0 的情况)
-```js
-var merge = function(nums1, m, nums2, n) {
-    
-    let i = m-1, j = n-1, k=m+n-1
-    
-    while (k >= 0) {
-        if (nums1[i] <= nums2[j] || nums1[i] === undefined) {
-            nums1[k--] = nums2[j--]
-        } else {
-            nums1[k--] = nums1[i--]
-        }
-    }
-};
-```
+### Array 实战题目
 
 https://leetcode.com/problems/climbing-stairs/
 
@@ -237,7 +143,48 @@ var moveZeroes = function(nums) {
 };
 ```
 
-https://leetcode-cn.com/problems/plus-one/
+https://leetcode-cn.com/problems/3sum/ (高频老题）
+
+解法:
+
+```js
+var threeSum = function(nums) {
+    let ans = [];
+    const len = nums.length;
+    if(nums == null || len < 3) return ans;
+    nums.sort((a, b) => a - b); // 排序
+    
+    for (let i = 0; i < len ; i++) {
+        if(nums[i] > 0) break; // 如果当前数字大于0，则三数之和一定大于0，所以结束循环
+        if(i > 0 && nums[i] == nums[i-1]) continue; // 去重
+        let L = i+1;
+        let R = len-1;
+        while(L < R){
+            const sum = nums[i] + nums[L] + nums[R];
+            if (sum == 0) {
+                ans.push([nums[i],nums[L],nums[R]]);
+                while (L<R && nums[L] == nums[L+1]) L++; // 去重
+                while (L<R && nums[R] == nums[R-1]) R--; // 去重
+                L++;
+                R--;
+            } else if (sum < 0) { 
+                L++;
+            } else if (sum > 0) {
+                R--;
+            }
+        }
+    }        
+    return ans;
+};
+```
+
+链表
+
+https://leetcode.com/problems/reverse-linked-list/
+https://leetcode.com/problems/swap-nodes-in-pairs
+https://leetcode.com/problems/linked-list-cycle
+https://leetcode.com/problems/linked-list-cycle-ii
+https://leetcode.com/problems/reverse-nodes-in-k-group/
 
 
 ## 第四课
