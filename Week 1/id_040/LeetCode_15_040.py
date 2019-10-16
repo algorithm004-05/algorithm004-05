@@ -15,35 +15,46 @@
 
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution(object):
+
+    # 第一遍
     def threeSum(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
-        暴力求解
+        双指针
         """
-        rlist = []
-        for l in nums:
-            for n in nums:
-                for m in nums:
-                    if n + m + l == 0:
-                        rlist.append([l, n, m])
-        return rlist
+        rdata = []
+        nums.sort()
+        for k in range(len(nums)-2):
+            kn = nums[k]
+            if kn > 0:
+                break
+            if k > 0 and nums[k] == nums[k - 1]: continue
+            i = k + 1
+            j = len(nums) - 1
+            while i < j:
+                sum_n = nums[i] + nums[j]
+                if kn == -sum_n:
+                    rdata.append([kn, nums[i], nums[j]])
+                    i += 1
+                    j -= 1
+                    while i < j and nums[i] == nums[i - 1]: i += 1
+                    while i < j and nums[j] == nums[j + 1]: j -= 1
+                elif sum_n < -kn:
+                    i += 1
+                    while i < j and nums[i] == nums[i - 1]: i += 1
+                elif sum_n > -kn:
+                    j -= 1
+                    while i < j and nums[j] == nums[j + 1]: j -= 1
 
-    def twoSum(self, nums, target):
-        target = -target
-        h = {}
-        for n in nums:
-            if h.get(n):
-                return n, h.get(n), True
-            h[target - n] = n
-        return 0, 0, False
+        return rdata
 
     # leetcode submit region end(Prohibit modification and deletion)
 
 
 if __name__ == '__main__':
     s = Solution()
-    nums = [0, 0, 0]
+    nums = [-1, 0, 1, 2, -1, -4]
     print(nums)
     rlist = s.threeSum(nums)
     print(rlist)

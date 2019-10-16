@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 //假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
 //
 // 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
@@ -25,14 +27,27 @@ package main
 //
 // Related Topics 动态规划
 
-// todo 第二遍 2019年10月15日
+// 第二遍 2019年10月15日
 //leetcode submit region begin(Prohibit modification and deletion)
 func climbStairs(n int) int {
+	// 将该题转为斐波那契数列求解
+	if n <= 2 {
+		return n
+	}
+
+	f1, f2, f3 := 1, 2, 3
+	for i := 3; i < n+1; i++ {
+		f3 = f1 + f2
+		f1 = f2
+		f2 = f3
+	}
+
+	return f3
 
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
 
 func main() {
-
+	fmt.Println(climbStairs(1000))
 }
