@@ -13,10 +13,10 @@
 // 
 // Related Topics 数组 双指针
 
-public class MoveZeroes {
+public class Leetcode_283_480 {
     public static void main(String[] args) {
         int[] arr = new int[]{0, 1, 0, 3, 12};
-        Solution2 solution = new MoveZeroes().new Solution2();
+        Solution2 solution = new Leetcode_283_480().new Solution2();
         solution.moveZeroes(arr);
         for (int n : arr) {
             System.out.print(n + " ");
