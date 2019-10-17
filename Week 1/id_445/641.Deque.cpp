@@ -11,9 +11,7 @@ public:
         last=0;
         _size=0;
     }
-    int getFront(){
 
-    }
     /** Adds an item at the front of Deque. Return true if the operation is successful. */
     bool insertFront(int value) {
         if(isFull())return false;
@@ -43,7 +41,8 @@ public:
     /** Deletes an item from the rear of Deque. Return true if the operation is successful. */
     bool deleteLast() {
         if(isEmpty())return false;
-        last=(last-1+_size)%_size;
+        last=(last-1+_capacity)%_capacity;
+        _size--;
         return true;
     }
     
