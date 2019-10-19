@@ -1,28 +1,33 @@
-#include <iostream>
-#include <iterator>
-#include <algorithm>
-#include <vector>
-using namespace std;
-class solution{
-    public movesZeros(vector<int>& nums ){
-        int j = 0;
-        for(int i = 0; i < nums.size(); i++){
-            if(nums[i] != 0){
-                nums[j]=nums[i];
-                if(i != j){
-                    nums[i] = 0;
-                }
-                j++;
-            }
-        }
-    }
-}
-int main()
+/*
+ * @lc app=leetcode.cn id=1 lang=cpp
+ *
+ * [1] 两数之和
+ */
+
+// @lc code=start
+class Solution
 {
-    vector<int> a;
-    istream_iterator<int> int_itr(cin);
-    copy(int_itr, istream_iterator<int>(), a.begin());
-    solution sol;
-    cout>>sol.movesZeros(a)>>endl;
-    return 0;
-}
+public:
+    vector<int> twoSum(vector<int> &nums, int target)
+    {
+        map<int, int> mymap;
+        vector<int> res{1, 1};
+        for (int i = 0; i < nums.size(); i++)
+        {
+
+        if (mymap.count(target - nums[i])&&mymap[target - nums[i]] != i)
+            {
+                res[0] = mymap[target - nums[i]];
+                res[1] = i;
+              //为什么不能在这里用return？
+              //  return res;
+                break;
+            }
+            if (!mymap.count(nums[i]))
+            mymap.insert(pair<int, int>(nums[i], i));
+        }
+        return res;
+    }
+};
+// @lc code=end
+
