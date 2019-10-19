@@ -56,10 +56,10 @@ public class DesignCircularDeque {
    */
   public boolean insertFront(int value) {
     if (rear == front && size == capacity) {
-      return false;//如果队列满，插入失败
+      return false;
     } else {
       front = (front + capacity - 1) % capacity;
-      myqueue[front] = value-;
+      myqueue[front] = value;
       size++;
       return true;
     }
@@ -70,7 +70,7 @@ public class DesignCircularDeque {
    */
   public boolean insertLast(int value) {
     if (rear == front && size == capacity) {
-      return false;//如果队列满，插入失败
+      return false;
     } else {
       myqueue[rear] = value;
       rear = (rear + 1 + capacity) % capacity;
@@ -115,8 +115,7 @@ public class DesignCircularDeque {
     if ((rear == front) && size == 0) {
       return -1;
     } else {
-      int frontE = myqueue[front];
-      return frontE;
+      return myqueue[front];
     }
   }
 
@@ -127,8 +126,7 @@ public class DesignCircularDeque {
     if ((rear == front) && size == 0) {
       return -1;
     } else {
-      int rearE = myqueue[(rear - 1 + capacity) % capacity];
-      return rearE;
+      return myqueue[(rear - 1 + capacity) % capacity];
     }
 
   }
