@@ -12,7 +12,7 @@
     Minimize the total number of operations.
 */
 
-public class LeetCode_283_060 {
+public class  MoveZeros {
 
   public void moveZeroes0(int[] nums) {
     int baseIndex = 0;
