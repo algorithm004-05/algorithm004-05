@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * 题目名称：Trapping Rain Water 接雨水
+ * 题目链接：https://leetcode-cn.com/problems/trapping-rain-water/
+ */
+
 /**
  * 第一种解法，双重循环，时间复杂度O(n^2)
  * @param Integer[] $height

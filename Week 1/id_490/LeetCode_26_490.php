@@ -1,4 +1,8 @@
 <?php
+/**
+ * 题目名称：remove-duplicates-from-sorted-array 删除排序数组中的重复项
+ * 题目链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
+ */
 
 /**
  * 第一种解法，双重循环

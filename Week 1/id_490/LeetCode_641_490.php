@@ -1,4 +1,9 @@
 <?php
+/**
+ * 题目名称：design-circular-deque 设计循环双端队列
+ * 题目链接：https://leetcode-cn.com/problems/design-circular-deque/
+ */
+
 class MyCircularDeque {
     private $head;
     private $tail;

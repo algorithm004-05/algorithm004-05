@@ -1,4 +1,8 @@
 <?php
+/**
+ * 题目名称：rotate-array 旋转数组
+ * 题目链接：https://leetcode-cn.com/problems/rotate-array/
+ */
 
 /**
  * 第一种解法：暴力求解，双重循环，时间复杂度O(n^2),空间复杂度O(1)

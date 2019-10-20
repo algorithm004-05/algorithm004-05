@@ -1,4 +1,8 @@
 <?php
+/**
+ * 题目名称：container-with-most-water 盛最多水的容器
+ * 题目链接：https://leetcode-cn.com/problems/container-with-most-water/
+ */
 
 /**
  * 暴力求解法，时间复杂度O(n^2)

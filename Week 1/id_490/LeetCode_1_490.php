@@ -1,4 +1,8 @@
 <?php
+/**
+ * 题目名称：two-sum 两数之和
+ * 题目链接：https://leetcode-cn.com/problems/two-sum/
+ */
 
 /**
  * 第一种解法：暴力求解，双重循环，时间复杂度O(n^2)
