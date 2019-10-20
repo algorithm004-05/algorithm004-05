@@ -28,7 +28,7 @@ void rotateOne(int* nums, int numsSize){
 /*
 void rotate(int* nums, int numsSize, int k){
     int count = 0;
-   // k = k % numsSize;    (a + b)%p = (a%p + b%p)%p
+    k = k % numsSize;    //(a + b)%p = (a%p + b%p)%p
     for(int start=0; count < numsSize; start++){
         int previous = nums[start];
         int current = start;
