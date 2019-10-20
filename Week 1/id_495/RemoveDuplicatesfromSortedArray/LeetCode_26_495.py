@@ -1,6 +1,6 @@
 #!/anaconda3/bin/python
 
-class Solution(object):
+class LeetCode_26_495(object):
 
   @staticmethod
   def removeDuplicates(nums):
@@ -17,4 +17,4 @@ class Solution(object):
     return slow + 1
 
 if __name__ == '__main__':
-    print(Solution.removeDuplicates([1,2,2,3,3,4,5]))
+    print(LeetCode_26_495.removeDuplicates([1,2,2,3,3,4,5]))

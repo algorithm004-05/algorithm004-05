@@ -5,7 +5,7 @@ class ListNode:
         self.val = x
         self.next = None
 
-class Solution(object):
+class LeetCode_21_495(object):
 
     def mergeTwoLists(self, l1, l2):
         prehead = ListNode(-1)
@@ -46,7 +46,7 @@ if __name__ == '__main__':
     bd.next = be
     be.next = bf
     bf.next = bg
-    c = Solution().mergeTwoLists(a,b)
+    c = LeetCode_21_495().mergeTwoLists(a,b)
     while c.next:
         print(c.val)
         c = c.next

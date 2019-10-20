@@ -2,7 +2,7 @@ package TwoSum;
 
 import java.util.HashMap;
 
-public class TwoSum {
+public class LeetCode_1_495 {
 
   public static void main(String[] args) {
     int[] numbers = {4,3,7,23,10};

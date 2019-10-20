@@ -1,6 +1,6 @@
 #!/anaconda3/bin/python
 
-class Solution(object):
+class LeetCode_88_495(object):
     """
     这个太骚了
     """
@@ -17,4 +17,4 @@ class Solution(object):
         return nums1
 
 if __name__ == '__main__':
-    print(Solution.merge([1,2,3,4,5,0,0,0,0,0,0,0,],5,[0,2,12,32,33,55,66],7))
+    print(LeetCode_88_495.merge([1,2,3,4,5,0,0,0,0,0,0,0,],5,[0,2,12,32,33,55,66],7))

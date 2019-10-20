@@ -1,6 +1,6 @@
 package PlusOne;
 
-public class PlusOne {
+public class LeetCode_66_495 {
 
   public static void main(String[] args) {
     int[] digits = {3,4,9,9,9};

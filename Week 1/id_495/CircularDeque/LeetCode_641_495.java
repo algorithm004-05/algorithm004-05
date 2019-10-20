@@ -5,7 +5,7 @@ package CircularDeque;
 * FIXME: 这里的rear是什么作用?
 * 没看懂
 */
-class CircularDeque {
+class LeetCode_641_495 {
 
     int[] a;
     int front, rear, cap;
