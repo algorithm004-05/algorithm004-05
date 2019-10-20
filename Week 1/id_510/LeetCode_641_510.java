@@ -39,7 +39,7 @@ package algorithm00405test.week1.job.done;
  * 链接：https://leetcode-cn.com/problems/design-circular-deque
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class MyCircularDeque {
+public class LeetCode_641_510 {
     private int[] obj;
     private int head;
     private int tail;
@@ -47,7 +47,7 @@ public class MyCircularDeque {
     int capacity;
 
     public static void main1(String[] args) {
-        MyCircularDeque a = new MyCircularDeque(3);
+        LeetCode_641_510 a = new LeetCode_641_510(3);
         boolean f = a.insertLast(1);
         f = a.insertLast(2);
         f = a.insertFront(3);
@@ -62,7 +62,7 @@ public class MyCircularDeque {
      *
      * @param k
      */
-    public MyCircularDeque(int k) {
+    public LeetCode_641_510(int k) {
         if (k < 1 || k > 1000) {
             throw new IllegalArgumentException("k 值为1～1000");
         }

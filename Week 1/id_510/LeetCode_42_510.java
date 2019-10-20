@@ -16,11 +16,11 @@ package algorithm00405test.week1.job.done;
  * 链接：https://leetcode-cn.com/problems/trapping-rain-water
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Trap {
+public class LeetCode_42_510 {
 
     public static void main(String[] args) {
         int[] aa = new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-        new Trap().trap(aa);
+        new LeetCode_42_510().trap(aa);
     }
 
     public int trap(int[] height) {
