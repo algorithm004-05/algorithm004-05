@@ -1,66 +1,64 @@
-//给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 
+//将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
 //
-// 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 
+// 示例： 
 //
-// 示例 1: 
-//
-// 给定数组 nums = [1,1,2], 
-//
-//函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 
-//
-//你不需要考虑数组中超出新长度后面的元素。 
-//
-// 示例 2: 
-//
-// 给定 nums = [0,0,1,1,1,2,2,3,3,4],
-//
-//函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。
-//
-//你不需要考虑数组中超出新长度后面的元素。
+// 输入：1->2->4, 1->3->4
+//输出：1->1->2->3->4->4
 // 
-//
-// 说明: 
-//
-// 为什么返回数值是整数，但输出的答案是数组呢? 
-//
-// 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 
-//
-// 你可以想象内部操作如下: 
-//
-// // nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝
-//int len = removeDuplicates(nums);
-//
-//// 在函数里修改输入数组对于调用者是可见的。
-//// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。
-//for (int i = 0; i < len; i++) {
-//    print(nums[i]);
-//}
-// 
-// Related Topics 数组 双指针
+// Related Topics 链表
 
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
+
+import JiKe.App;
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
 class Solution {
-    public int removeDuplicates(int[] nums) {
-        int temp = 1;
-        for (int i = 0; i < nums.length; i++) {
-            if(i > 0 && nums[i] != nums[i - 1]){
-                nums[temp] = nums[i];
-                temp++;
-            }else if(i > 0 && nums[i] == nums[i - 1]) {
-                continue;
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        //利用一个头节点保存首部
+        App.ListNode pHead = new App.ListNode(0);
+        //利用一个节点往后赋值
+        App.ListNode prev = pHead;
+        while(l1!=null && l2 != null) {
+            if(l1.val <= l2.val) {
+                //l1小了。将l1的值赋值到prev后。
+                prev.next = l1;
+                l1 = l1.next;
+                //l1切换到下个节点
+            }else {
+                //l2小了，将l2的值赋值到prev后。
+                prev.next = l2;
+                l2 = l2.next;
+                //l2切换到下个节点
             }
+            //这一次的prev.next确定了，切换到下一个prev节点
+            prev = prev.next;
         }
-        return  temp;
+        //若l1或l2长度不相等，那么。将有剩下节点的指针直接放到prev后面即可 （题中l1,l2已排序）
+        prev.next = l1 == null ? l2 : l1;
+
+        return pHead.next;
     }
-    public int removeDuplicates(int[] nums) {
-        int temp = nums.length > 0 ? 1 : 0;
-        for(int i : nums) {
-            if(i != nums[temp])
-                nums[temp++] = i;
-        }
-       return temp;
-    }
+    //这个题有个更简单的解法如下,还没太弄懂
+    //主要思想是判断l1 和 l2的值那个更小，将其后面的节点地址断开，赋上当前节点的下一个节点和另一个链表节点比较完成的值(以此递归)
+//     public ListNode mergeTwoLists(ListNode l1, ListNode l2){
+// 		if(l1 == null) return l2;
+// 		if(l2 == null) return l1;
+// 		if(l1.val < l2.val){
+// 			l1.next = mergeTwoLists(l1.next, l2);
+// 			return l1;
+// 		} else{
+// 			l2.next = mergeTwoLists(l1, l2.next);
+// 			return l2;
+// 		}
+// }
 }
 //leetcode submit region end(Prohibit modification and deletion)
