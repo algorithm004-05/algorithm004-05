@@ -1,5 +1,3 @@
-package CircularDeque;
-
 /**
 * @author leetcode
 * FIXME: 这里的rear是什么作用?

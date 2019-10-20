@@ -1,5 +1,3 @@
-package PlusOne;
-
 public class LeetCode_66_495 {
 
   public static void main(String[] args) {

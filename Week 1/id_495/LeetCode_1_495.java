@@ -1,5 +1,3 @@
-package TwoSum;
-
 import java.util.HashMap;
 
 public class LeetCode_1_495 {

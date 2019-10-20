@@ -1,5 +1,3 @@
-package TrappingRainWater;
-
 import java.lang.Math;
 
 public class LeetCode_42_495 {

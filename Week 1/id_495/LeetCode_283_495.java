@@ -1,5 +1,3 @@
-package MoveZeroes;
-
 public class LeetCode_283_495 {
 
   public static void main(String[] args) {

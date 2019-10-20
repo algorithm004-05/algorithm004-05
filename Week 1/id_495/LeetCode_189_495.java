@@ -1,5 +1,3 @@
-package rotateArray;
-
 public class LeetCode_189_495 {
 
   public static void main(String[] args) {
