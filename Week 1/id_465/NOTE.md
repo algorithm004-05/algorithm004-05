@@ -27,7 +27,7 @@
 
 #### 课后作业
 - [x] [26. 删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
-- [ ] [189. 旋转数组](https://leetcode-cn.com/problems/rotate-array/)
+- [x] [189. 旋转数组](https://leetcode-cn.com/problems/rotate-array/)
 - [ ] [21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
 - [ ] [88. 合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
 - [ ] [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
@@ -52,5 +52,5 @@
 #### 课后作业
 - [ ] 用 add first 或 add last 这套新的 API 改写 Deque 的代码
 - [ ] 分析 Queue 和 Priority Queue 的源码
-- [ ] [641. 设计循环双端队列](https://leetcode-cn.com/problems/design-circular-deque)
-- [ ] [42. 接雨水](https://leetcode.com/problems/trapping-rain-water/)
+- [x] [641. 设计循环双端队列](https://leetcode-cn.com/problems/design-circular-deque)
+- [x] [42. 接雨水](https://leetcode.com/problems/trapping-rain-water/)
