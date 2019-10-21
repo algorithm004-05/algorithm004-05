@@ -1,4 +1,137 @@
 # NOTE
+第5课
+
+https://leetcode-cn.com/problems/valid-anagram/description/
+
+解法1 排序
+```js
+var isAnagram = function(s, t) {
+
+    if (typeof s === 'undefined' || typeof t === 'undefined') return false
+
+    if (s.length !== t.length) return false
+
+    return s.split('').sort().join() === t.split('').sort().join()
+};
+```
+
+解法2 HashMap
+```js
+var isAnagram = function(s, t) {
+
+    if (typeof s === 'undefined' || typeof t === 'undefined') return false
+    
+    if (s.length !== t.length) return false
+    
+    const map = new Map()
+    
+    for (let i in s) {
+        let key = map.get(s[i])
+        key !== undefined ? map.set(s[i], ++key) :  map.set(s[i], 1)
+    }
+    
+    for (let i in t) {
+        let key = map.get(t[i])
+        if (key !== undefined) {
+            map.set(t[i], --key) 
+        } else {
+            return false
+        }
+    }
+
+    
+    for (let value of map.values()) {
+       if (value !== 0) {
+           return false
+       }
+    }
+    
+    return true
+};
+```
+
+解法3 自建 HashMap
+
+```js
+var isAnagram = function(s, t) {
+    
+    if (typeof s === 'undefined' || typeof t === 'undefined') return false
+    
+    if (s.length !== t.length) return false
+    
+    let count = s => {
+        let map = {}
+        s.forEach(i => {
+            let hashCode = i.charCodeAt() - 'a'.charCodeAt()
+            map[hashCode] !== undefined ? map[hashCode] += 1 : map[hashCode] = 1
+        })
+        
+        return map
+    }
+    
+    let sM = count(s.split(''))
+    let tM = count(t.split(''))
+    
+    function compareMap(sM, tM) {
+       for (let key in sM) {
+           if (sM[key] !== tM[key]) {
+               return false
+           } 
+       }
+       return true
+    }
+    
+    return compareMap(sM, tM)
+};
+```
+
+
+https://leetcode-cn.com/problems/group-anagrams/
+
+
+```js
+var groupAnagrams = function(strs) {
+    let map = new Map()
+    
+    function hash(key) {
+        let m = Array.from({length: 26}).fill(0)
+        
+        for (let s of key) {
+           let code = s.charCodeAt() - 'a'.charCodeAt()
+           m[code] += 1
+        }
+        
+        return m.join('#')
+    }
+    
+    for (let i=0; i<strs.length; i++) {
+        let hashCode = hash(strs[i])
+        let value = map.get(hashCode)
+        value !== undefined ? map.set(hashCode, [...value, strs[i]]) : map.set(hashCode, [strs[i]])
+    }
+    
+    return Array.from(map.values())
+};
+```
+
+https://leetcode-cn.com/problems/two-sum/description/
+
+```js
+var twoSum = function(nums, target) {
+    let map = new Map()
+    for (let i=0; i<nums.length; i++) {
+        map.set(target - nums[i], i)
+    }
+    
+    for (let j=0; j<nums.length; j++) {
+        let temp = map.get(nums[j])
+        if (temp !== undefined && temp !== j) {
+            return [j, temp]
+        }
+    }
+};
+```
+
 
 第6课
 树，二叉树，二叉搜索树  
