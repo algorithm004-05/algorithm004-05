@@ -1,0 +1,15 @@
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int firstIndex=0;        
+        for(int lastIndex=1;lastIndex<nums.length;lastIndex++ ) {
+            if(nums[firstIndex] != nums[lastIndex] ) {
+               nums[firstIndex+1] =nums[lastIndex];
+                firstIndex++;
+            }            
+        }
+        return firstIndex+1;
+    }
+}
+
+
+第一次做题：感觉有思路但是详细细化成为执行步骤的时候又想不明白了，看了正确答案，能够理解怎么回事，抄的代码，希望第二次做的时候能够完整的做出来
