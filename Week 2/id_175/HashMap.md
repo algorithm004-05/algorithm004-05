@@ -4,12 +4,12 @@
 
 ![Put](https://github.com/shizeying/algorithm004-05/blob/master/Week%202/id_175/putVal.png)
 
-1. 判断键值对数组***table[i]***是否为null,否则进行***resize()***扩容
-2. 根据key值计算***hash***值得到插入的数组索引**i**,如果***table[i]=null***,直接新建结点添加,转向(<u>**6)**</u>,如果***table[i]***不为空,转向**<u>(3)</u>**;
-3. 判断***table[i]***的首个元素是否和***key***一样,如果相同直接覆盖***value***,否则转向<u>**(4)**</u>,这里相同指的是***hashCode***和***equals***;
-4. 判断***table[i]***是否为***treeNode***,即***table[i]***是否为红黑树,如果是,则直接在树中插入键值对,否则转向**<u>(5)</u>**;
-5. 遍历***table[i]***,判断链表长度是否***大于8***,***大于8***的话就吧链表转换为红黑树,在红黑树中执行插入操作,否则进行链表的插入操作;在遍历过程中若发现***key***已经存在直接覆盖***value***即可
-6. 插入成功后,判断实际存在的键值对数量***size***是否超过了*最大容量*的***threshold***,如果超过进行***扩容***
+1. 判断键值对数组<B>table[i]</B>是否为null,否则进行<B>resize()</B>扩容
+2. 根据key值计算<B>hash</B>值得到插入的数组索引<B>i</B>如果<B>table[i]=null</B>,直接新建结点添加,转向<B><u>(6)</u></B>,如果<B>table[i]</B>不为空,转向<B><u>(3)</u></B>;
+3. 判断<B>table[i]</B>的首个元素是否和<B>key</B>一样,如果相同直接覆盖<B>value</B>否则转向<B><u>(4)</u></B>,这里相同指的是<B>hashCode</B>和<B>equals</B>;
+4. 判断<B>table[i]</B>是否为<B>treeNode</B>,即<B>table[i]</B>是否为红黑树,如果是,则直接在树中插入键值对,否则转向<B><u>(5)</u></B>;
+5. 遍历<B>table[i]</B>,判断链表长度是否<B>大于8</B>,<B>大于8</B>的话就吧链表转换为红黑树,在红黑树中执行插入操作,否则进行链表的插入操作;在遍历过程中若发现<B>key</B>已经存在直接覆盖<B>value</B>即可
+6. 插入成功后,判断实际存在的键值对数量<B>size</B>是否超过了*最大容量*的<B>threshold</B>,如果超过进行<B>扩容</B>
 
 ```java
 final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
