@@ -95,7 +95,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 ## get
 
-在最差的情况下,链表过长的时候,时间复杂度就变成了<font size=6><B>$O(n)$</B></font>了,哈希表就变成像废纸一样,所以1.8中就将链表转化为了红黑树,把查询时间将为了<img src="https://github.com/shizeying/algorithm004-05/blob/master/Week%202/id_175/CodeCogsEqn.svg](https://github.com/shizeying/algorithm004-05/blob/master/Week 2/id_175/CodeCogsEqn.svg"></img>，尤其是数据量巨大的时候，这种算法就很有效了
+在最差的情况下,链表过长的时候,时间复杂度就变成了<font size=6><B>$O(n)$</B></font>了,哈希表就变成像废纸一样,所以1.8中就将链表转化为了红黑树,把查询时间将为了<img src="https://github.com/shizeying/algorithm004-05/blob/master/Week%202/id_175/CodeCogsEqn.svg"></img>，尤其是数据量巨大的时候，这种算法就很有效了
 
 
 ```java
