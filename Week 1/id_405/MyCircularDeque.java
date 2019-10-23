@@ -19,7 +19,7 @@ public class MyCircularDeque {
         /** Adds an item at the front of Deque. Return true if the operation is successful. */
         public boolean insertFront(int value) {
                 if (isFull()) return  false;
-                DoubleListNode node = new DoubleListNode();
+                DoubleListNode node = new DoubleListNode(1);
                 node.pre = head.pre;
                 node.next = head;
                 head.pre.next = node;
@@ -30,7 +30,7 @@ public class MyCircularDeque {
 
         /** Adds an item at the rear of Deque. Return true if the operation is successful. */
         public boolean insertLast(int value) {
-                DoubleListNode node = new DoubleListNode();
+                DoubleListNode node = new DoubleListNode(2);
                 node.pre = tail;
                 node.next = tail.next;
                 tail.next.pre = node;
@@ -70,11 +70,13 @@ public class MyCircularDeque {
         /** Checks whether the circular deque is empty or not. */
         public boolean isEmpty() {
                 if (size == 0) return true;
+                return false;
         }
 
         /** Checks whether the circular deque is full or not. */
         public boolean isFull() {
-                if (size == k) return true;
+                if (size == capacity) return true;
+                return false;
         }
 }
 
