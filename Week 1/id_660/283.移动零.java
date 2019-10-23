@@ -32,7 +32,15 @@
 // @lc code=start
 class Solution {
     public void moveZeroes(int[] nums) {
-        
+        if (nums == null || nums.length <= 1) return;
+        int i = 0; 
+        for(int j = 0; j < nums.length; j++){
+            if(nums[j] != 0)
+                nums[i++] = nums[j];
+        }
+        for(int p = i; p < nums.length; p++){
+            nums[p] = 0;
+        }
     }
 }
 // @lc code=end
