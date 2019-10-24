@@ -523,3 +523,180 @@ var permuteUnique = function(nums) {
 ```
 
 ## 第 8 课
+https://leetcode-cn.com/problems/majority-element/description/ （简单、但是高频）
+
+
+解法1 排序
+```js
+var majorityElement = function(nums) {
+    nums.sort((a, b) => a-b)
+    return nums[Math.floor(nums.length/2)]
+};
+```
+
+解法2 HashMap
+```
+var majorityElement = function(nums) {
+    
+    if (nums.length === 1) {
+        return nums[0]
+    }
+    
+    let map = new Map()
+    
+    for (let i=0; i<nums.length; i++) {
+        if (map.has(nums[i])) {
+            let c = map.get(nums[i])
+            if (c+1 > nums.length/2) {
+                return nums[i]
+            }
+            map.set(nums[i], c+1)
+        } else {
+            map.set(nums[i], 1)
+        }
+    }
+};
+```
+
+解法3 分治
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+    
+    function countInRange(nums, num, leftIndex, rightIndex) {
+        let count = 0;
+        for (let i = leftIndex; i <= rightIndex; i++) {
+            if (nums[i] === num) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    
+    function helper(nums, leftIndex, rightIndex) {
+        if (leftIndex === rightIndex) {
+            return nums[leftIndex]
+        }
+        
+        let mid = Math.floor((rightIndex - leftIndex)/2 + leftIndex)
+        
+        let left = helper(nums, leftIndex, mid);
+        let right = helper(nums, mid+1, rightIndex);
+
+        // if the two halves agree on the majority element, return it.
+        if (left === right) {
+            return left;
+        }
+
+        // otherwise, count each element
+        let leftCount = countInRange(nums, left, leftIndex, mid)
+        let rightCount = countInRange(nums, right, mid+1, rightIndex)
+        
+        return leftCount > rightCount ? left : right;
+
+    }
+    
+    return helper(nums, 0, nums.length-1)
+};
+```
+
+https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/
+
+解法1
+```js
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+    
+    if(digits === "") return []
+    
+    let map = new Map()
+    
+    map.set('2', 'abc')
+    map.set('3', 'def')
+    map.set('4', 'ghi')
+    map.set('5', 'jkl')
+    map.set('6', 'mno')
+    map.set('7', 'pqrs')
+    map.set('8', 'tuv')
+    map.set('9', 'wxyz')
+    
+    
+    let res = []
+    
+    function helper(index, digits, str, visited) {
+        if (index === digits.length) {
+           res.push(str) 
+           return  
+        }
+        
+        for (let i=0; i<digits.length; i++) {
+            
+            let letters = map.get(digits[i])
+            
+            for (let j=0; j<letters.length; j++) {
+                 if (visited[i] || visited[i+1] ) continue
+                 visited[i] = true    
+                 str += letters[j]
+                 helper(index+1, digits, str, visited)
+                 visited[i] = false    
+                 str = str.substr(0, str.length-1) 
+            }
+        }
+    }
+    
+    helper(0, digits, '', [])
+    
+    return res
+};
+```
+
+解法2
+```js
+var letterCombinations = function(digits) {
+    
+    if(digits === "") return []
+    
+    let map = new Map()
+    
+    map.set('2', 'abc')
+    map.set('3', 'def')
+    map.set('4', 'ghi')
+    map.set('5', 'jkl')
+    map.set('6', 'mno')
+    map.set('7', 'pqrs')
+    map.set('8', 'tuv')
+    map.set('9', 'wxyz')
+    
+    
+    let res = []
+    
+    function helper(index, digits, str) {
+        if (index === digits.length) {
+           res.push(str) 
+           return  
+        }
+            
+        let letters = map.get(digits[index])
+
+        for (let j=0; j<letters.length; j++) {
+             str += letters[j]
+             helper(index+1, digits, str)
+             str = str.substr(0, str.length-1) 
+        }
+        
+    }
+    
+    helper(0, digits, '')
+    
+    return res
+};
+```
+
+https://leetcode-cn.com/problems/n-queens/
