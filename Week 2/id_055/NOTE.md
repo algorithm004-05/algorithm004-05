@@ -705,3 +705,102 @@ function isLeaf(node) {
 ```
 
 https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
+
+## 第 8 课
+
+分治模板
+
+```js
+function divide_conquer(problem, param1, param2, ...) {
+
+    // 递归终止条件
+    if (problem is None) {
+        print_result
+        return
+    }
+
+    // 处理或准备数据
+    data = prepare_data(problem)
+    subproblems = split_problem(problem, data)
+
+    // conquer subproblems
+    subresult1 = divide_conquer(subproblems[0], p1, ...)
+    subresult2 = divide_conquer(subproblems[1], p1, ...)
+    subresult3 = divide_conquer(subproblems[2], p1, ...)
+
+    // process and generate the final result
+    result = process_result(subresult1, subresult2, subresult3, ...)
+
+    // 清理状态
+}
+```
+
+回溯
+八皇后和数独问题
+
+https://leetcode-cn.com/problems/powx-n/
+
+```js
+/**
+ * @param {number} x
+ * @param {number} n
+ * @return {number}
+ */
+var myPow = function(x, n) {
+  if (n < 0) {
+    n = -n;
+    return 1 / pow(x, n);
+  } else {
+    return pow(x, n);
+  }
+};
+
+var pow = function(x, n) {
+  // x^0 = 1
+  if (n === 0) {
+    return 1;
+  }
+
+  let half = pow(x, Math.floor(n / 2));
+
+  if (n % 2 === 1) {
+    return half * half * x;
+  } else {
+    return half * half;
+  }
+};
+```
+
+https://leetcode-cn.com/problems/subsets/
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function(nums) {
+  let ans = [];
+
+  function helper(index, nums, list) {
+    // 递归终结条件
+    if (index === nums.length) {
+      ans.push(list);
+      return;
+    }
+    // 处理当前层
+
+    // 进入下一层
+    helper(index + 1, nums, list.slice(0));
+    list.push(nums[index]);
+    // 注意当前层的变量，需要 copy 到下一层 list.slice(0)
+    helper(index + 1, nums, list.slice(0));
+
+    // 清理状态
+    list.pop();
+  }
+
+  helper(0, nums, []);
+
+  return ans;
+};
+```
