@@ -45,13 +45,17 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
       inOrderHashMap.put(val, index++);
     }
 
-//    注意 helper0 helper1 递归停止条件判断  局部边界值的选择 以及 最开始调用时传入范围的不同
-//    推荐使用helper1
 //    return helper0(0, inorder.length);
     return helper1(0, inOrder.length - 1);
 
   }
 
+  // Note:
+  // The difference between helper0() and helper1() in the following aspects:
+  // The range at the very first call
+  // Recursive stop condition
+  // Sub-boundary
+  // I prefer the later one
   private TreeNode helper0(int left, int right) {
     if (left == right) {
       return null;
@@ -68,7 +72,6 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
     return root;
   }
 
-
   private TreeNode helper1(int left, int right) {
     if (left > right) {
       return null;
@@ -83,7 +86,6 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
 
     return root;
   }
-
 
   public TreeNode buildTree1(int[] preOrder, int[] inOrder) {
     return helper2(preOrder, inOrder, (long)Integer.MIN_VALUE + 1);
@@ -132,5 +134,4 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
 
     return root;
   }
-
 }
