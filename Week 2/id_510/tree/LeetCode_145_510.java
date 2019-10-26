@@ -1,8 +1,10 @@
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
+
+import javax.jws.WebParam.Mode;
 
 import javafx.scene.Node;
 
@@ -25,7 +27,7 @@ import javafx.scene.Node;
  * 链接：https://leetcode-cn.com/problems/binary-tree-preorder-traversal
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class LeetCode_144_510 {
+public class LeetCode_145_510 {
     public class TreeNode {
         int val;
         TreeNode left;
@@ -41,7 +43,7 @@ public class LeetCode_144_510 {
      * @param root
      * @return
      */
-    public List<Integer> preorderTraversal(TreeNode root) {
+    public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         helper(root, list);
         return list;
@@ -51,34 +53,31 @@ public class LeetCode_144_510 {
         if(null == root){
            return;
         }
-        list.add(root.val);
         if(null != root.left){
             helper(root.left, list);
         }
         if(null != root.right){
             helper(root.right, list);
         }
+        list.add(root.val);
     }
 
     /**
-     * 栈
+     * 栈  前序遍历反向处理  从右向左 链表反向加入
      * @param root
      * @return
      */
-    public List<Integer> preorderTraversal1(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
+    public List<Integer> postorderTraversal1(TreeNode root) {
+        LinkedList<Integer> list = new LinkedList();
         Stack<TreeNode> stack = new Stack<>();
         TreeNode node = root;
         while(null != node || !stack.empty()){
             if(null != node){
-                // 跟节点直接添加
-                list.add(node.val);
+                list.addFirst(node.val);
                 stack.push(node);
-                // 遍历左边
-                node = node.left;
+                node = node.right;
             } else {
-                // 遍历右边
-                node = stack.pop().right;
+                node = stack.pop().left;
             }
         }
         return list;
