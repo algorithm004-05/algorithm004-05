@@ -1,0 +1,14 @@
+func moveZeroes(nums []int)  {
+    i := 0
+    j := 0
+    
+    for ; i < len(nums); i ++ {
+        if nums[i] != 0 {
+            if i != j {
+                nums[j] = nums [i]
+                nums[i] = 0
+            }
+            j ++
+        }
+    }
+}
