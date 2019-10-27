@@ -1,4 +1,5 @@
-/**
+import java.util.*;
+/*
  * https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal
  * n叉树的后续遍历
  */
