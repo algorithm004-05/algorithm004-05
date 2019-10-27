@@ -178,14 +178,351 @@ var threeSum = function(nums) {
 };
 ```
 
-链表
+### 链表
 
 https://leetcode.com/problems/reverse-linked-list/
+
+解法
+```js
+var reverseList = function(head) {
+    let currNode = head, preNode = null
+   
+    while (currNode) {
+       [currNode.next, preNode, currNode] = [preNode, currNode, currNode.next]
+    }
+    
+    return preNode
+};
+```
+
 https://leetcode.com/problems/swap-nodes-in-pairs
+
+解法
+```js
+var swapPairs = function(head) {
+   
+    let preNode = new ListNode(-1)
+    
+    preNode.next = head
+    
+    currNode = preNode
+    
+    while (currNode.next && currNode.next.next ) {
+        let a = currNode.next
+        let b = a.next
+        
+        currNode.next = b
+        a.next = b.next
+        b.next = a
+       
+        currNode = a
+    }
+    
+    return preNode.next
+    
+};
+```
+
 https://leetcode.com/problems/linked-list-cycle
+
+解法
+```js
+var hasCycle = function(head) {
+    
+    // 使用 set 集合
+    
+//     let currNode = head, set = new Set()
+    
+//     while (currNode) {
+//         if (set.has(currNode)) {
+//             return true
+//         }
+//         set.add(currNode)
+//         currNode = currNode.next
+//     }
+    
+//     return false
+    
+    // 使用快慢指针
+    
+    let fast = slow = head
+    
+    while (fast && fast.next ) {
+        
+        fast = fast.next.next
+        slow = slow.next
+        
+        if (fast === slow) {
+           return true 
+        }
+    }
+    
+    return false
+};
+```
+
 https://leetcode.com/problems/linked-list-cycle-ii
 https://leetcode.com/problems/reverse-nodes-in-k-group/
+
+```js
+var reverseKGroup = function(head, k) {
+    let preNode = new ListNode(-1)
+    let tmp = preNode
+    
+    while (true) {
+        let n = k, currNode = head, stack = []
+        
+        while (n && currNode) {
+            stack.push(currNode)
+            currNode = currNode.next
+            n--
+        }
+        
+        if (n !== 0 ) {
+            tmp.next = head
+            break
+        }
+        
+        while (stack.length) {
+            tmp.next = stack.pop()
+            tmp = tmp.next
+        }
+        
+        head = currNode
+    }
+    
+    return preNode.next
+        
+};
+```
 
 
 ## 第四课
 
+### 栈和队列
+
+https://leetcode-cn.com/problems/valid-parentheses/
+
+解法
+```js
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+    const map = {
+        "}":"{",
+        ")":"(",
+        "]":"["
+    }
+    
+    const stack = []
+    
+    for (let i=0; i<s.length; i++) {
+        let temp = map[s[i]]
+        if (temp) {
+            let top = stack.pop();
+            if (top !== temp) {
+                return false;
+            }
+        } else {
+            stack.push(s[i])
+        }
+    }
+    
+    return stack.length === 0
+    
+};
+```
+
+https://leetcode-cn.com/problems/min-stack/
+
+解法
+···js
+/**
+ * initialize your data structure here.
+ */
+var MinStack = function() {
+    this.arr = []
+    this.minArr = [] 
+};
+
+/** 
+ * @param {number} x
+ * @return {void}
+ */
+MinStack.prototype.push = function(x) {
+    this.arr.push(x)
+    let minTop = this.minArr[this.minArr.length - 1]
+    if (minTop === undefined || minTop >= x ) {
+        this.minArr.push(x)
+    }
+};
+
+/**
+ * @return {void}
+ */
+MinStack.prototype.pop = function() {
+    let top = this.arr.pop()
+    let minTop = this.minArr[this.minArr.length - 1]
+    
+    if (top === minTop) {
+        this.minArr.pop()
+    }
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.top = function() {
+   return this.arr[this.arr.length - 1]
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.getMin = function() {
+    return this.minArr[this.minArr.length - 1]
+};
+
+/** 
+ * Your MinStack object will be instantiated and called as such:
+ * var obj = new MinStack()
+ * obj.push(x)
+ * obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.getMin()
+ */
+···
+
+https://leetcode-cn.com/problems/largest-rectangle-in-histogram/submissions/
+
+解法1 暴力
+```js
+var largestRectangleArea = function(heights) {
+    let maxArea = 0
+    for (let i=0; i<heights.length; i++) {
+        for(let j=i; j<heights.length; j++) {
+            
+            // 找出i与j之间柱子的最小值
+            let minHieght = Number.MAX_SAFE_INTEGER
+            
+            for (let k = i; k <= j; k++) {
+                minHieght = Math.min(heights[k], minHieght)
+            }
+            let area = (j-i+1) * minHieght
+            maxArea = area > maxArea ? area : maxArea;
+        }
+    }
+    
+    return maxArea
+};
+```
+
+解法2 暴力 优化
+
+```js
+// 暴力 优化
+var largestRectangleArea = function(heights) {
+    let maxArea = 0
+    for (let i=0; i<heights.length; i++) {
+        // 柱子的最小值
+        let minHieght = Number.MAX_SAFE_INTEGER
+
+        for(let j=i; j<heights.length; j++) {
+            // 每次获取两个柱子中的最小值，也就保证了，随着 J 增加，minHeight 始终是 i 与 j 之间的最小值
+            minHieght = Math.min(heights[j], minHieght)        
+            let area = (j-i+1) * minHieght
+            maxArea = area > maxArea ? area : maxArea;
+        }
+    }
+    
+    return maxArea
+};
+```
+
+解法3 栈
+
+```js
+//  栈
+var largestRectangleArea = function(heights) {
+   
+    let maxArea = 0
+    let stack = []
+    stack.push(-1)
+    
+    for (let i=0; i<heights.length; i++) {
+        while (stack[stack.length-1] !== -1 && heights[stack[stack.length-1]] >= heights[i]) {
+           maxArea = Math.max(maxArea, heights[stack.pop()] * (i - stack[stack.length-1] - 1));
+        }
+        stack.push(i)
+    }
+    
+    while (stack[stack.length-1] !== -1) {
+        maxArea = Math.max(maxArea, heights[stack.pop()] * (heights.length - stack[stack.length-1] -1));
+    }
+    return maxArea
+};
+```
+
+https://leetcode-cn.com/problems/sliding-window-maximum/
+
+解法1
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var maxSlidingWindow = function(nums, k) {
+    if(!nums) return []
+    
+    let window = [], res = []
+    
+    nums.forEach((n,i) => { 
+        
+        if ( i >= k && window[0] <= i-k) {
+           window.shift() 
+        }
+        
+        while (window.length !== 0 && nums[window[window.length-1]] <= n) {
+            window.pop()
+        }
+        
+        window.push(i)
+
+        
+        if (i >= k - 1) {
+           res.push(nums[window[0]]) 
+        }
+    })
+    
+    return res
+};
+```
+
+解法2
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var maxSlidingWindow = function(nums, k) {
+   let window = []
+   let res = []
+    
+   for (let i = 0; i < nums.length; i++) {
+        if (i < k - 1) {
+            window.push(nums[i]);
+        } else { // 窗口开始向前滑动
+            window.push(nums[i]);
+            res.push(Math.max(...window));
+            window.shift();
+        }
+    }
+    
+    return res
+    
+};
+```
