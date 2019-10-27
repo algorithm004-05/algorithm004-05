@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a5b9189-0641-4301-a7c8-4adfa5c9a9aa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Week 2/id_085/LeetCode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Week 1/id_085/homework/leetCode03.java" beforeDir="false" afterPath="$PROJECT_DIR$/Week 1/id_085/leetCode03.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,10 +32,17 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Week 2/id_085/LeetCode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2381" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Week 1/id_085/leetCode03.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="72" selection-start-line="72" selection-end-line="72" />
+            <state relative-caret-position="-22">
+              <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -62,7 +69,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="953" />
+    <option name="x" value="420" />
+    <option name="y" value="98" />
     <option name="width" value="974" />
     <option name="height" value="1087" />
   </component>
@@ -81,12 +89,12 @@
             <path>
               <item name="algorithm004-05" type="b2602c69:ProjectViewProjectNode" />
               <item name="algorithm004-05" type="462c0819:PsiDirectoryNode" />
-              <item name="Week 1" type="462c0819:PsiDirectoryNode" />
+              <item name="Week 2" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="algorithm004-05" type="b2602c69:ProjectViewProjectNode" />
               <item name="algorithm004-05" type="462c0819:PsiDirectoryNode" />
-              <item name="Week 1" type="462c0819:PsiDirectoryNode" />
+              <item name="Week 2" type="462c0819:PsiDirectoryNode" />
               <item name="id_085" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -101,7 +109,13 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Week 2/id_085" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
@@ -139,6 +153,7 @@
       <updated>1571582583452</updated>
       <workItem from="1571582590783" duration="538000" />
       <workItem from="1571583167552" duration="256000" />
+      <workItem from="1572176730376" duration="959000" />
     </task>
     <task id="LOCAL-00001" summary="085-Week 01">
       <created>1571582832365</created>
@@ -151,10 +166,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="794000" />
+    <option name="totallyTimeSpent" value="1753000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="953" y="0" width="974" height="1087" extended-state="0" />
+    <frame x="420" y="98" width="974" height="1087" extended-state="0" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.50291264" side_tool="true" weight="0.27728376" />
       <window_info id="Designer" order="1" />
@@ -205,9 +220,14 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Week 1/id_085/leetCode03.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        <state relative-caret-position="-22">
+          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Week 2/id_085/LeetCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2381" />
       </provider>
     </entry>
   </component>
