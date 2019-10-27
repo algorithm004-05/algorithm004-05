@@ -17,6 +17,40 @@ Template: def recur(level, param)
 2. process(level, param) (current level logic)
 3. recur(level+1, new_param) (go to next level)
 4. restore current status (clean current level if needed)
+```python
+def recursion(level, param1, param2, ...):
+    # ending condition
+    if level > MAX_LEVEL:
+        process_result
+        return
+    # process logic in current level
+    process(level, data)
+    
+    # drill down
+    self.recursion(level+1, p1, ...)
+    
+    # reverse the current level status if needed
+```
+
+## divide-and-conquer / backtracking
+Template
+```python
+def divide_conquer(problem, param1, param2, ...):
+    # recursion ending condition
+    if problem is None:
+        print_result
+        return
+    # prepare data
+    data = preapare_data(problem)
+    subproblems = split_problem(problem, data)
+    # conquer subproblems
+    subresult1 = self.divide_conquer(subproblems[0], p1, ...)
+    subresult2 = self.divide_conquer(subproblems[1], p1, ...)
+    subresult3 = self.divide_conquer(subproblems[2], p1, ...)
+    ...
+    # process and generate the final result
+    result = process_result(subresult1, subresult2, subresult3, ...)
+```
 
 ## Notes on the leetcode problems
 ### Problem 242
