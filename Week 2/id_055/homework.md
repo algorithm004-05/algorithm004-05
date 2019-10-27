@@ -700,3 +700,57 @@ var letterCombinations = function(digits) {
 ```
 
 https://leetcode-cn.com/problems/n-queens/
+
+```js
+/**
+ * @param {number} n
+ * @return {string[][]}
+ */
+var solveNQueens = function(n) {
+    let res = [], cols = new Set(), pie = new Set(), na = new Set()
+    
+    function helper(row /*level*/, n, curr_state) {
+        if (row >= n) {
+            res.push(curr_state)
+            return 
+        }
+        
+        for (let col=0; col<n; col++) {
+            if (cols.has(col) || pie.has(row + col) || na.has(row-col)) {
+                continue
+            }
+            
+            cols.add(col)
+            pie.add(row + col)
+            na.add(row-col)
+            
+            // 注意复制 curr_state
+            helper(row+1, n, [...curr_state, col])
+            
+            cols.delete(col)
+            pie.delete(row + col)
+            na.delete(row-col)
+        }
+    }
+    
+    helper(0, n, [])
+    
+    
+    return generate(res)
+};
+
+function generate(res) {
+    
+    let temp = []
+    
+    for (let i=0; i<res.length; i++) {
+        let len = res[i].length
+        temp[i] = []
+        for (let j=0; j<len; j++) {
+             temp[i].push(Array(len).fill('.').fill('Q', res[i][j], res[i][j]+1).join(''))
+        }
+    }
+    
+    return temp
+}
+```
