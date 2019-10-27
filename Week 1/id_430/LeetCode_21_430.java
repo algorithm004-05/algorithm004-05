@@ -1,10 +1,10 @@
-// Copyright(c) 2019 Mobvoi Inc. All Rights Reserved. 
+package id_430;
 
 /**
  * Definition for singly-linked list. public class ListNode { int val; ListNode next; ListNode(int
  * x) { val = x; } }
  */
-class Solution {
+public class LeetCode_21_430 {
   public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     if (l1 == null) {
       return l2;
