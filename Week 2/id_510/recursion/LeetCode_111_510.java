@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 
 
 /**
@@ -34,7 +36,80 @@ public class LeetCode_111_510 {
         }
     }
 
+    /**
+     *  递归
+     *  左右子节点都不存在
+     * @param root
+     * @return
+     */
     public int minDepth(TreeNode root) {
-        return 0;
+        if (null == root) {
+            return 0;
+        }
+        // 无子节点 则返回深度1
+        if (null == root.left && null == root.right) {
+            return 1;
+        }
+        // 左节点最浅
+        int leftMin = minDepth(root.left);
+        // 右节点最浅
+        int rightMin = minDepth(root.right);
+        // 无左节点 则返回右节点深度
+        if (leftMin == 0) {
+            return rightMin + 1;
+        }
+        // 无右节点 则返回左节点深度
+        if (rightMin == 0) {
+            return leftMin + 1;
+        }
+        // 返回一个最小深度
+        return Math.min(leftMin, rightMin) + 1;
+    }
+
+    /**
+     * 递归优化
+     * @param root
+     * @return
+     */
+    public int minDepth2(TreeNode root) {
+        if (null == root) {
+            return 0;
+        }
+        int leftMin = minDepth2(root.left);
+        int rightMin = minDepth2(root.right);
+        return (0 == leftMin || 0 == rightMin) ? (leftMin + rightMin + 1) : Math.min(leftMin, rightMin) + 1;
+    }
+
+
+     /**
+     * 中序遍历
+     *  左右子节点都不存在
+     * @param root
+     * @return
+     */
+    public int minDepth1(TreeNode root) {
+        if(null == root){
+            return 0;
+        }
+        int min  = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            min++;
+            while(size-- > 0){
+                TreeNode node = queue.poll();
+                if(null == node.left && null == node.right){
+                    return min;
+                } 
+                if(null != node.left){
+                    queue.offer(node.left);
+                }
+                if(null != node.right){
+                    queue.offer(node.right);
+                }
+            }
+        }
+        return min;
     }
 }

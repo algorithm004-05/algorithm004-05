@@ -1,5 +1,6 @@
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +22,64 @@ import java.util.List;
  */
 public class LeetCode_22_510 {
 
+    public static void main(String[] args) {
+        System.out.println(new LeetCode_22_510().generateParenthesis1(4));
+    }
+
     public List<String> generateParenthesis(int n) {
-        return null;
+        List<String> list = new ArrayList<>();
+        helper(n, n, "", list);
+        return list;
+    }
+
+    /**
+     * 递减
+     * 
+     * @param left
+     * @param right
+     * @param s
+     * @param list
+     */
+    private void helper(int left, int right, String s, List list) {
+        if (left == 0 && right == 0) {
+            list.add(s);
+            return;
+        }
+        if (left > 0) {
+            helper(left - 1, right, s + "(", list);
+        }
+
+        if (right > left) {
+            helper(left, right - 1, s + ")", list);
+        }
+    }
+
+    public List<String> generateParenthesis1(int n) {
+        List<String> list = new ArrayList<>();
+        helper(0, 0, n, "", list);
+        return list;
+    }
+
+    /**
+     * 递增
+     * 
+     * @param left
+     * @param right
+     * @param n
+     * @param s
+     * @param list
+     */
+    private void helper(int left, int right, int n, String s, List list) {
+        if (left == n && right == n) {
+            list.add(s);
+            return;
+        }
+        if (left < n) {
+            helper(left + 1, right, n, s + "(", list);
+        }
+
+        if (right < left) {
+            helper(left, right + 1, n, s + ")", list);
+        }
     }
 }
