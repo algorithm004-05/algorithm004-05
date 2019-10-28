@@ -1,8 +1,8 @@
-class Leetcode_ {
+public class Leetcode_236_recurseTree {
 
     private TreeNode ans;
 
-    public Leetcode_() {
+    public Leetcode_236_recurseTree() {
         // Variable to store LCA node.
         this.ans = null;
     }
