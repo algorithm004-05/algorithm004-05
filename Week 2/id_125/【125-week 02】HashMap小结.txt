@@ -1,0 +1,24 @@
+hashmap是储存key-vale键值对形式的集合
+	不能存在重复的key
+	每个 key 只能对应一个 value, 多个 key 可以对应一个 value
+	
+HashMap是基于拉链法实现的一个散列表。	
+jdk1.8之前，其使用数组+链表的形式存储数据。最差时间复杂度为O(n)
+1.8之后，内部由数组+链表+红黑树实现 最差复杂度变成了O(logN)。
+当链表长度到达一个阈值时（7或8），会将链表转换成红黑树提高性能。
+而当链表长度缩小到另一个阈值时（6），又会将红黑树转换回单向链表提高性能
+
+
+数组的初始容量为16，而容量是以2的次方扩充的
+
+hashmap是否需要扩充是通过负载因子判断的，如果当前元素个数为数组容量的0.75时，就会扩充数组
+HashMap加载因子，默认0.75。该值越大，速度越慢，耗费的空间越小。越小，则反之
+
+
+hashmap怎么存放数据的？
+	获取数值的hash值
+	用hash值除以数组长度取余。放到对应位置
+	如果多个不同的key存在在了同一个位置，将会形成链表/红黑树
+	
+hashmap是线程不安全的，如果想要线程安全，那么可以使用currenthashmap或者
+在hashmap外层或者使用Map<String, String> synchronizedHashMap = Collections.synchronizedMap(new HashMap<String, String>());
