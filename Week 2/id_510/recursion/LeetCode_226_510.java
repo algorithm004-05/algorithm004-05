@@ -1,6 +1,9 @@
 
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
   *翻转一棵二叉树。
@@ -42,6 +45,15 @@ public class LeetCode_226_510 {
     }
 
     public TreeNode invertTree(TreeNode root) {
+        Queue<E> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+
+            
+
+        }
+
         return null;
     }
 }
