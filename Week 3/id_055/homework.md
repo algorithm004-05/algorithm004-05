@@ -176,3 +176,189 @@ var numIslands = function(grid) {
 ```
 
 https://leetcode-cn.com/problems/minesweeper/description/
+
+## 第 10 课
+
+https://leetcode-cn.com/problems/lemonade-change/description/
+
+```js
+/**
+ * @param {number[]} bills
+ * @return {boolean}
+ */
+var lemonadeChange = function(bills) {
+  let five = 0,
+    ten = 0;
+
+  for (let i = 0; i < bills.length; i++) {
+    // 顾客支付 5 美元，直接收钱
+    if (bills[i] === 5) {
+      five++;
+    } else if (bills[i] === 10) {
+      // 顾客支付 10 美元，如果有 5 美元零钱，找钱，否则失败
+      if (five > 0) {
+        five--;
+        ten++;
+      } else {
+        return false;
+      }
+    } else {
+      // 顾客支付 20 美元，如果有 5 美元 和 10 美元零钱，找钱，
+      if (ten > 0 && five > 0) {
+        ten--;
+        five--;
+      } else if (five >= 3) {
+        // 顾客支付 20 美元，如果只有 5 美元，找钱 3*5，否则失败
+        five -= 3;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
+```
+
+https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/description/
+
+```js
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+  let profit = 0;
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] > prices[i - 1]) {
+      profit += prices[i] - prices[i - 1];
+    }
+  }
+
+  return profit;
+};
+```
+
+https://leetcode-cn.com/problems/assign-cookies/description/
+
+解法
+
+```js
+/**
+ * @param {number[]} g
+ * @param {number[]} s
+ * @return {number}
+ */
+var findContentChildren = function(g, s) {
+  g.sort((a, b) => a - b);
+  s.sort((a, b) => a - b);
+
+  let i = 0,
+    j = 0,
+    res = 0;
+
+  while (i < g.length && j < s.length) {
+    // 当饼干可以满足胃口
+    if (g[i] <= s[j]) {
+      i++;
+      j++;
+      res++;
+      // 不满足胃口，拿更大尺寸的饼干
+    } else {
+      j++;
+    }
+  }
+
+  return res;
+};
+```
+
+https://leetcode-cn.com/problems/walking-robot-simulation/description/
+
+解法
+
+```js
+/**
+ * @param {number[]} commands
+ * @param {number[][]} obstacles
+ * @return {number}
+ */
+var robotSim = function(commands, obstacles) {
+  let dx = [0, 1, 0, -1];
+  let dy = [1, 0, -1, 0];
+  let x = 0,
+    y = 0,
+    di = 0;
+
+  let set = new Set(obstacles.map(s => s.toString()));
+
+  let ans = 0;
+
+  for (let i = 0; i < commands.length; i++) {
+    if (commands[i] === -2) {
+      di = (di + 3) % 4;
+    } else if (commands[i] === -1) {
+      di = (di + 1) % 4;
+    } else {
+      for (let k = 0; k < commands[i]; k++) {
+        let nx = x + dx[di];
+        let ny = y + dy[di];
+        let code = `${nx},${ny}`;
+
+        if (!set.has(code)) {
+          x = nx;
+          y = ny;
+          ans = Math.max(ans, x * x + y * y);
+        }
+      }
+    }
+  }
+
+  return ans;
+};
+```
+
+https://leetcode-cn.com/problems/jump-game/
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function(nums) {
+  let lastPos = nums.length - 1;
+  for (let i = nums.length - 1; i >= 0; i--) {
+    if (i + nums[i] >= lastPos) {
+      lastPos = i;
+    }
+  }
+  return lastPos === 0;
+};
+```
+
+https://leetcode-cn.com/problems/jump-game-ii/
+
+// 不理解
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var jump = function(nums) {
+  let end = 0,
+    maxPosition = 0,
+    steps = 0;
+
+  for (let i = 0; i < nums.length - 1; i++) {
+    maxPosition = Math.max(maxPosition, nums[i] + i);
+    if (i === end) {
+      //遇到边界，就更新边界，并且步数加一
+      end = maxPosition;
+      steps++;
+    }
+  }
+
+  return steps;
+};
+```
