@@ -125,4 +125,54 @@ function findWordIndex(word, wordList, i) {
 ```
 
 https://leetcode-cn.com/problems/number-of-islands/
+
+```js
+/**
+ * @param {character[][]} grid
+ * @return {number}
+ */
+var numIslands = function(grid) {
+  let rowLen = grid.length;
+  if (!rowLen) return 0;
+  let colLen = grid[0].length;
+  let dx = [0, 0, 1, -1],
+    dy = [1, -1, 0, 0],
+    islands = 0;
+
+  for (let i = 0; i < rowLen; i++) {
+    for (let j = 0; j < colLen; j++) {
+      // 如果是陆地，炸飞， 注意是 字符串 '0'
+      if (grid[i][j] === '1') {
+        sink(i, j, grid);
+        islands++;
+      }
+    }
+  }
+
+  function sink(i, j, grid) {
+    // 终止条件
+    if (grid[i][j] === '0') {
+      return;
+    }
+
+    // 处理当前层
+    grid[i][j] = '0';
+
+    // 进入下一层
+    for (let k = 0; k < dx.length; k++) {
+      if (
+        i + dx[k] >= 0 &&
+        i + dx[k] < rowLen &&
+        j + dy[k] >= 0 &&
+        j + dy[k] < colLen
+      ) {
+        sink(i + dx[k], j + dy[k], grid);
+      }
+    }
+  }
+
+  return islands;
+};
+```
+
 https://leetcode-cn.com/problems/minesweeper/description/
