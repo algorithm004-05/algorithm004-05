@@ -362,3 +362,113 @@ var jump = function(nums) {
   return steps;
 };
 ```
+
+### 第 11 课
+
+https://leetcode-cn.com/problems/search-in-rotated-sorted-array/
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function(nums, target) {
+  let left = 0,
+    right = nums.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((right + left) / 2);
+
+    if (nums[mid] === target) {
+      return mid;
+    } else if (nums[mid] < nums[right]) {
+      // 说明右边有序
+      if (nums[right] >= target && target > nums[mid]) {
+        // 目标在有序的一边，将 left 紧逼
+        left = mid + 1;
+      } else {
+        // 排除一半，进入另一半
+        right = mid - 1;
+      }
+    } else {
+      // 说明左边有序
+      if (nums[left] <= target && target < nums[mid]) {
+        // 目标在有序的一边，将 right 紧逼
+        right = mid - 1;
+      } else {
+        // 排除一半，进入另一半
+        left = mid + 1;
+      }
+    }
+  }
+
+  return -1;
+};
+```
+
+https://leetcode-cn.com/problems/search-a-2d-matrix/
+
+```js
+/**
+ * @param {number[][]} matrix
+ * @param {number} target
+ * @return {boolean}
+ */
+var searchMatrix = function(matrix, target) {
+  let row = matrix.length;
+  if (row === 0) return false;
+  let column = matrix[0].length;
+
+  let left = 0,
+    right = row * column - 1;
+
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+
+    // 坐标转换, 注意 行号等于  下标/列数, 列号 下标%列数
+    let r = Math.floor(mid / column);
+    let c = mid % column;
+
+    if (matrix[r][c] === target) {
+      return true;
+    } else if (matrix[r][c] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return false;
+};
+```
+
+https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findMin = function(nums) {
+  let left = 0;
+  (right = nums.length - 1), (min = Number.MAX_SAFE_INTEGER);
+
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+
+    if (nums[mid] < nums[right]) {
+      // 右边有序, 获取最小值
+      min = Math.min(min, nums[mid]);
+      // 修改范围，紧逼，搜索左边
+      right = mid - 1;
+    } else {
+      // 左边有序, 获取最小值
+      min = Math.min(min, nums[left]);
+      // 修改范围，紧逼，搜索右边
+      left = mid + 1;
+    }
+  }
+
+  return min;
+};
+```

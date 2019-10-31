@@ -288,3 +288,106 @@ var largestValues = function(root) {
   return Array.from(res.values());
 };
 ```
+
+### 第 11 课
+
+二分查找前期
+
+1. 目标函数的单调性 （单调递增或单调递减）
+2. 存在上下界
+3. 能够所以访问 （链表就不好实现，但是可以改成跳表）
+
+二分查找模板
+
+```js
+let left = 0, right = array.length - 1
+while (left <= right) {
+  let mid = Math.floor((left + right)/2)
+  if (array[mid] === target) {
+    break or return result
+  } else if (array[mid] < target>) {
+    left = mid + 1
+  } else {
+    right = mid - 1
+  }
+}
+```
+
+https://leetcode-cn.com/problems/sqrtx/submissions/
+
+解法
+
+```js
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var mySqrt = function(x) {
+  let left = 0,
+    right = x,
+    mid = null;
+
+  while (right - left > 1e-6) {
+    mid = (left + right) / 2;
+    if (mid * mid === x) {
+      return mid;
+    } else if (mid * mid < x) {
+      left = mid;
+    } else {
+      right = mid;
+    }
+  }
+
+  return Math.floor(right);
+};
+```
+
+https://leetcode-cn.com/problems/valid-perfect-square/submissions/
+
+解法 1 暴力法
+
+```js
+/**
+ * @param {number} num
+ * @return {boolean}
+ */
+var isPerfectSquare = function(num) {
+  for (let i = 0; i <= num; i++) {
+    if (i * i === num) {
+      return true;
+    } else if (i * i > num) {
+      return false;
+    }
+  }
+  return false;
+};
+```
+
+解法 2 二分法
+
+```js
+/**
+ * @param {number} num
+ * @return {boolean}
+ */
+var isPerfectSquare = function(num) {
+  if (num === 1) return true;
+
+  let left = 1,
+    right = num;
+
+  while (left <= right) {
+    let mid = Math.floor((right + left) / 2);
+
+    if (mid * mid === num) {
+      return true;
+    } else if (mid * mid < num) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return false;
+};
+```
