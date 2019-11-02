@@ -1,5 +1,6 @@
-// Copyright(c) 2019 Mobvoi Inc. All Rights Reserved.
-class Solution {
+package id_430;
+
+public class LeetCode_189_430 {
   public void rotate(int[] nums, int k) {
     int n = nums.length;
     int count = 0;
