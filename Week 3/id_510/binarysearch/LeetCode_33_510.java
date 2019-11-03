@@ -46,7 +46,7 @@ public class LeetCode_33_510 {
         int left = 0;
         int right = nums.length-1;
         while (left < right){
-            int mid = (left>>1) + (right >> 1);
+            int mid = left + ((right- left)>> 1);
             if(nums[left] <= nums[mid]){
                 // 左边单调判断是否在左边
                 if(nums[left] <= target && nums[mid] >= target){
@@ -60,7 +60,7 @@ public class LeetCode_33_510 {
                 if(nums[mid] <= target && nums[right] >= target){
                     left = mid;
                 } else {
-                    right = mid -1;
+                    right = mid - 1;
                 }
             }
         }
@@ -69,5 +69,8 @@ public class LeetCode_33_510 {
         }
         return -1;
     }
+
+
+    
 
 }

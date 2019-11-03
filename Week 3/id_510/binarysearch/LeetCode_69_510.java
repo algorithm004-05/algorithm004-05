@@ -27,7 +27,94 @@ package algorithm00405test.week3.lesson.todo.binarysearch;
  */
 public class LeetCode_69_510 {
 
+    
     public int mySqrt(int x) {
-        return 0;
+        if(x <= 0){
+            return 0;
+        }
+        int low = 1;
+        int upper = x;
+        int mid = 1;
+        while(low < upper){
+            mid = low + ((upper-low)>>1);
+            if(mid > x/mid){
+                upper = mid -1;
+            } else if(mid == x/mid){
+                low = mid;
+                break;
+            }else {
+                // 相等 说明low与upper相邻
+                if (low == mid){
+                    // 判断upper是否匹配
+                    if(upper  <=  x/upper){
+                        low = upper;
+                    }
+                    break;
+                }
+                low = mid;
+            }
+        }
+        return low;
+    }
+
+    /**
+     * 
+     * @param x
+     * @return
+     */
+    public int mySqrt1(int x) {
+        if(x <= 0){
+            return 0;
+        }
+        long low = 1;
+        long upper = x;
+        while(low < upper){
+            long mid = low + ((upper-low)>>1);
+            if(mid*mid > x){
+                upper = mid -1;
+            }else {
+                low = mid + 1;
+            }
+        }
+        return (int)(low * low <= x ? low:low-1);
+    }
+
+    /**
+     * 牛顿迭代法
+     * f(x) = x^2 - a
+     * 
+     * 节点x0的斜率 f‘(x0) = 2x0
+     * 
+     * f‘(x0) = (f(x) - f(x0))/(x-x0)
+     * 
+     * 令f(x) = 0; 则 x 就是 a 的平方根
+     * 
+     * 2x0 = (x^2 - a - (x0 - a))/(x - x0)
+     * 
+     * x = 1/2(x0 + a/x0)
+     *
+     * 
+     * @param x
+     * @return
+     */
+    public int mySqrt2(int x) {
+        if(x <= 0){
+            return 0;
+        }
+        double cur = 1;
+        double pre = 1;
+        while(pre > 1e-6){
+            pre = cur;
+            cur = (cur + x/cur)/2;
+            pre -=cur;
+            if(pre< 0){
+                pre = -pre;
+            }
+        }
+        return (int)cur;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new LeetCode_69_510().mySqrt2(2147483647));
     }
 }
