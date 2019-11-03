@@ -29,8 +29,45 @@ package algorithm00405test.week3.lesson.todo.binarysearch;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class LeetCode_33_510 {
+    public static void main(String[] args) {
+        System.out.println(new LeetCode_33_510().search(new int[]{4,5}, 5));
+    }
+
+    /**
+     * 左右边界的值变化应该一直 不然会出现死循环
+     * @param nums
+     * @param target
+     * @return
+     */
     public int search(int[] nums, int target) {
-        return 0;
+        if(null == nums || 0 == nums.length){
+            return -1;
+        }
+        int left = 0;
+        int right = nums.length-1;
+        while (left < right){
+            int mid = (left>>1) + (right >> 1);
+            if(nums[left] <= nums[mid]){
+                // 左边单调判断是否在左边
+                if(nums[left] <= target && nums[mid] >= target){
+                    right = mid;
+                }  else {
+                    left = mid+1;
+                }
+                
+            } else {
+                // 右边单调 判断是否在右边
+                if(nums[mid] <= target && nums[right] >= target){
+                    left = mid;
+                } else {
+                    right = mid -1;
+                }
+            }
+        }
+        if(nums[left] == target){
+            return left;
+        }
+        return -1;
     }
 
 }
