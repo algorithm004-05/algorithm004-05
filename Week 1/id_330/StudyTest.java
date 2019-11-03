@@ -16,11 +16,6 @@ public class StudyTest {
         pq.add("q");
         pq.add("a");
         pq.add("b");
-
-
-
-
-
     }
 
     public boolean isValid(String s) {
