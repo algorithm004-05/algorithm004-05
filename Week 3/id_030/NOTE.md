@@ -72,9 +72,12 @@ def BFS(graph, start, end):
   2.存在上下界
   3.能够通过索引访问
   查询数据中间点数据，根据条件，每次查询过滤掉一半的数据，简化查询次数
+  
+  
+  
   /*************二分查找模板start****************/
   left, right = 0, len(array) - 1 
-while left <= right: 
+  while left <= right: 
 	  mid = (left + right) / 2 
 	  if array[mid] == target: 
 		    # find the target!! 
