@@ -2,6 +2,9 @@ package algorithm00405test.week3.lesson.todo.greedyAlgorithm;
 
 
 /**
+ * 
+ * 跳跃游戏 II
+ * 
  * 给定一个非负整数数组，你最初位于数组的第一个位置。
  *
  * 数组中的每个元素代表你在该位置可以跳跃的最大长度。
@@ -25,6 +28,48 @@ package algorithm00405test.week3.lesson.todo.greedyAlgorithm;
 public class LeetCode_45_510 {
 
     public int jump(int[] nums) {
+        if(null == nums || 0 == nums.length){
+            return 0;
+        }
+        int farthest = 0; // 最大跳跃值 即最优解
+        int end = 0; // 最远边界
+        int jumps = 0; // 跳跃次数
+        // 最后一个是目的地 不用处理
+        for (int i = 0; i < nums.length - 1; i++) {
+            farthest = Math.max(farthest, i + nums[i]);
+            /**
+             * 遍历到最远边界后 
+             * 获取这段区间值的最大跳跃值 i + nums[i]
+             * 跳跃次数+1
+             */
+            if(i == end){
+                jumps++;
+                end = farthest;
+                // 如果当前节点的跳跃值 可以达到数组最后一个值 则结束
+                if(end >= nums.length -1){
+                    break;
+                }
+            }
+            
+        }
+        return jumps;
+    }
+
+    private int helper(int[] nums,int index,int count){
+        // 最大跳跃值大于等于了数组最末位
+        if(index + 1 + nums[index]  >= nums.length){
+            count++;
+            return count;
+        }
+
+       count =  helper(nums, index-1, count);
+        
+
         return 0;
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println(3e5);
     }
 }
