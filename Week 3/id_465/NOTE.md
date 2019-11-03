@@ -33,6 +33,28 @@ def bfs(graph,start,end):
         visited.add(node)
 
         process(node)
-        nodes=generate_related_node(node
+        nodes=generate_related_node(node)
         queue.push(nodes)
+```
+```Java
+public void BFS(Object start,Object end){
+    Queue<Pair<Object,Integer>> q=new LinkedList<Pair<Object,Integer>>();
+    q.offer(new Pair<Object,Integer>(start,1));
+
+    HashMap<Object,Boolean> visited=new HashMap<Object,Boolean>();
+    visited.put(start,true);
+
+    while(!q.isEmpty()){
+        Pair<Object,Integer> node=q.remove();
+        Object entity=node.getKey();
+        Integer level=node.getValue();
+        visited.put(entity,true)
+
+        //process
+
+        node=get_last_node();
+        q.offer(node);
+    }
+}
+
 ```
