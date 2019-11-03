@@ -73,7 +73,7 @@ class ListNode
     }
 }
 
-class ListNode
+class List
 {
     public $val;
     public $next;
