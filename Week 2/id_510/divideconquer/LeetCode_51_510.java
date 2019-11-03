@@ -56,6 +56,12 @@ public class LeetCode_51_510 {
         return list;
     }
 
+    /**
+     * 深度遍历
+     * @param c
+     * @param clo
+     * @param list
+     */
     private void dfs(char[][] c, int clo,List<List<String>> list){
         // 结束
         if (clo == c.length) {
@@ -83,8 +89,9 @@ public class LeetCode_51_510 {
             // 遍历到y的上一列结束 
             for (int j = 0; j < y; j++) {
                 /**
-                 * 横向  x == i 
-                 * 对角线 函数f(x) = x+y 或 x-y     x+y = i+j   x-y = i - j
+                 * 横向 坐标轴 x == i 
+                 * 对角线 函数y = x+常量 或 y =x-常量
+                 *      x+y = i+j   x-y = i - j
                  */
                 if(c[i][j] == 'Q' && (x == i ||( x -y == i - j )|| (x + y) ==  (i + j))){
                     return false;
