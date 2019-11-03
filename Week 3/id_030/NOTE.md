@@ -6,8 +6,9 @@
 深度优先搜索是基于递归的实现
 /**********深度优先搜索代码模板start********/
 递归写法
-visited = set() 
 
+
+visited = set() 
 def dfs(node, visited):
 if node in visited: # terminator//所有的节点都已经访问过，停止循环
 	# already visited 
