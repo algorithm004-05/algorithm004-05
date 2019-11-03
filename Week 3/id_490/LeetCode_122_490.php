@@ -1,7 +1,7 @@
 <?php
 /**
- * 题目名称：search-in-rotated-sorted-array 搜索旋转排序数组
- * 题目链接：https://leetcode-cn.com/problems/search-in-rotated-sorted-array/
+ * 题目名称：best-time-to-buy-and-sell-stock-ii 买卖股票的最佳时机 II
+ * 题目链接：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/
  */
 
 class Solution {
