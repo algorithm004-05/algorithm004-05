@@ -35,4 +35,4 @@ if (nums[mid] < nums[AR]) {
 
 
 
-完整代码可以查看这里。
+完整代码可以查看[这里](https://github.com/KeithMorning/algorithm004-05/blob/master/Week%203/id_505/153.find-minimum-in-rotated-sorted-array.java)。
