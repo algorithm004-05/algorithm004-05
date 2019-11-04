@@ -12,6 +12,25 @@
 ### 常用实现Set接口的容器
 [HashSet](https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/util/HashSet.html)及[TreeSet](https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/util/TreeSet.html)为常用Set容器；此外还有[LinkedHashSet](https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/util/LinkedHashSet.html)，`LinkedHashSet`是`HashSet`。三个容器的关系实现都由相应的Map实现。
 
+## 递归模板
+```Java
+public void recur(int level, int param){
+    // terminator
+    if(level>MAX_LEVEL){
+        // process result
+        return;
+    }
+
+    // process current logic
+    process(level, param)
+
+    // drill down
+    recur(level+1, newParam);
+
+    // restore current status
+}
+```
+
 ## 作业
 - [x] [242. 有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)
 - [x] [49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)
