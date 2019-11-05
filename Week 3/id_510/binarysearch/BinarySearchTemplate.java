@@ -1,5 +1,16 @@
 
-
+/**
+ * 二分查找模板
+ * 
+ *    left < right 2个元素比较  最终边界left和right相同，用任意一个判断
+ *    int mid = left + ((right - left + 1)>>1)  mid为第2个  则变动边界right = mid - 1; left = mid; binarySearch
+ *    int mid = left + ((right - left)>>1)      mid为第1个  则变动边界left = mid + 1;right = mid;  binarySearch1
+ * 
+ *     left <= right 2个元素比较  左left=mid+1，右right=mid-1  
+ *     target在left=mid+1 则返回right且right>=0判断       binarySearch2
+  *    target在right=mid-1则返回left且left < a.length判断 binarySearch3
+ * 
+ */
 public class BinarySearchTemplate{
 
     public static void main(String[] args) {
@@ -27,7 +38,7 @@ public class BinarySearchTemplate{
     
     /**
      * 
-     *    left < right 2个元素比较  最终边界left和right相同，返回任意一个
+     *    left < right 2个元素比较  最终边界left和right相同，用任意一个判断
      **** int mid = left + ((right - left + 1)>>1)  mid为第2个  则变动边界right = mid - 1; left = mid;
      *    int mid = left + ((right - left)>>1)      mid为第1个  则变动边界left = mid + 1;right = mid;
      * @param a
@@ -53,7 +64,7 @@ public class BinarySearchTemplate{
     }
 
     /**
-     *    left < right 2个元素比较  最终边界left和right相同，返回任意一个
+     *    left < right 2个元素比较  最终边界left和right相同，用任意一个判断
      *    int mid = left + ((right - left + 1)>>1)  mid为第2个  则变动边界right = mid - 1; left = mid;
      **** int mid = left + ((right - left)>>1)      mid为第1个  则变动边界left = mid + 1;right = mid;
      * @param a
@@ -82,9 +93,9 @@ public class BinarySearchTemplate{
 
     /**
      * 
-     *    left <= right 2个元素比较  左 mid+1右mid-1  
-     **** target在left=mid+1 则返回right且right>=0
-     *    target在right=mid-1则返回left且left < a.length
+     *    left <= right 2个元素比较  左left=mid+1，右right=mid-1  
+     **** target在left=mid+1 则返回right且right>=0判断
+     *    target在right=mid-1则返回left且left < a.length判断
      * @param a
      * @param target
      * @return
@@ -111,9 +122,9 @@ public class BinarySearchTemplate{
 
     /**
      * 
-     *    left <= right 2个元素比较  左 mid+1右mid-1  
-     *    target在left=mid+1 则返回right且right>=0
-     **** target在right=mid-1则返回left且left < a.length
+     *    left <= right 2个元素比较  左left=mid+1，右right=mid-1
+     *    target在left=mid+1 则返回right且right>=0判断
+     **** target在right=mid-1则返回left且left < a.length判断
      * @param a
      * @param target
      * @return
