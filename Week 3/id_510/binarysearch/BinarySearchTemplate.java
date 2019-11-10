@@ -3,12 +3,12 @@
  * 二分查找模板
  * 
  *    left < right 2个元素比较  最终边界left和right相同，用任意一个判断
- *    int mid = left + ((right - left + 1)>>1)  mid为第2个  则变动边界right = mid - 1; left = mid; binarySearch
- *    int mid = left + ((right - left)>>1)      mid为第1个  则变动边界left = mid + 1;right = mid;  binarySearch1
+ *    int mid = left + ((right - left + 1)>>1)  mid为第2个  第2个值为右边值则变动右边界right = mid - 1; left = mid; binarySearch
+ *    int mid = left + ((right - left)>>1)      mid为第1个  第1个值为左边值则变动左边界left = mid + 1;right = mid;  binarySearch1
  * 
  *     left <= right 2个元素比较  左left=mid+1，右right=mid-1  
- *     target在left=mid+1 则返回right且right>=0判断       binarySearch2
-  *    target在right=mid-1则返回left且left < a.length判断 binarySearch3
+ *     target在left=mid+1 则返回相反边界right且right>=0判断       binarySearch2
+  *    target在right=mid-1则返回相反边界left且left < a.length判断 binarySearch3
  * 
  */
 public class BinarySearchTemplate{
