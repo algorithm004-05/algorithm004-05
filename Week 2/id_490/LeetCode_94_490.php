@@ -16,13 +16,9 @@ function inorderTraversal($root) {
     return $res;
 }
 
-function traversal($root, &$res) {
-    if ($root == null) return;
-    if ($root->left != null) {
-        traversal($root->left, $res);
-    }
-    $res[] = $root->val;
-    if ($root->right != null) {
-        traversal($root->right, $res);
-    }
+function traversal($node, &$res) {
+    if ($node == null) return;
+    traversal($node->left, $res);
+    $res[] = $node->val;
+    traversal($node->right, $res);
 }
