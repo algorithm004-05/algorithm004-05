@@ -301,4 +301,79 @@ var maxProduct = function(nums) {
 };
 ```
 
-https://leetcode-cn.com/problems/coin-change/description/?utm_source=LCUS&utm_medium=ip_redirect_q_uns&utm_campaign=transfer2china
+https://leetcode-cn.com/problems/coin-change/submissions/
+
+BFS
+
+```js
+/**
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+/**
+ * BFS 超时
+ * BFS 加缓存 (记录已经访问的节点)
+ */
+var coinChange = function(coins, amount) {
+  if (amount === 0) return 0;
+
+  coins.sort((a, b) => b - a);
+
+  let queue = [amount],
+    step = 0,
+    visited = new Set();
+
+  while (queue.length !== 0) {
+    let size = queue.length;
+
+    for (let i = 0; i < size; i++) {
+      let node = queue.shift();
+
+      if (node === 0) {
+        return step;
+      }
+
+      // 先从大额硬币开始
+      for (let coin of coins) {
+        // 优化点，已经访问过的节点，无需再访问，必须还可以继续兑换零钱
+        if (node >= coin && !visited.has(node - coin)) {
+          visited.add(node - coin);
+          queue.push(node - coin);
+        }
+      }
+    }
+
+    step++;
+  }
+
+  return -1;
+};
+```
+
+DP
+
+```js
+/**
+ * DP f(n) = min(f(n-k)) + 1  k =[1,2,3]
+ */
+var coinChange = function(coins, amount) {
+  // 最大组合不会超过 amount+1
+  let max = amount + 1;
+
+  let dp = new Array(amount + 1).fill(max);
+
+  // amount 为 0 时，组合数为 0
+  dp[0] = 0;
+
+  for (let i = 1; i <= amount; i++) {
+    for (let coin of coins) {
+      if (i - coin >= 0) {
+        dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+      }
+    }
+  }
+
+  return dp[amount] === max ? -1 : dp[amount];
+};
+```
