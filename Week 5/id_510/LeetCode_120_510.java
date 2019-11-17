@@ -27,6 +27,12 @@ import java.util.List;
 public class LeetCode_120_510 {
 
     public int minimumTotal(List<List<Integer>> triangle) {
-        return 0;
+        var dp = triangle;
+        for (var i = dp.length - 2; i >= 0; i--) {
+            for (var j = 0; j < dp[i].length; j++) {
+                dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + dp[i][j];
+            }
+        }
+        return dp[0][0];
     }
 }
