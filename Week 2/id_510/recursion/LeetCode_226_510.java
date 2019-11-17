@@ -1,6 +1,9 @@
 
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
   *翻转一棵二叉树。
@@ -41,7 +44,54 @@ public class LeetCode_226_510 {
         }
     }
 
+    /**
+     * 广度 层 队列
+     * @param root
+     * @return
+     */
     public TreeNode invertTree(TreeNode root) {
-        return null;
+        if(null == root){
+            return root;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        TreeNode temp;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            while(size -- > 0){
+                // 获取节点
+                TreeNode node = queue.poll();
+                //左节点存放队列
+                if(null != node.left){
+                    queue.offer(node.left);
+                }
+                if(null != node.right){
+                    queue.offer(node.right);
+                }
+                // 交换左右节点
+                temp = node.left;
+                node.left = node.right;
+                node.right = temp;
+            }
+        }
+        return root;
     }
+
+    /**
+     * 深度 前中后 递归 栈
+     * @param root
+     * @return
+     */
+    public TreeNode invertTree1(TreeNode root) {
+        if(null == root){
+            return root;
+        }
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        invertTree1(root.left);
+        invertTree1(root.right);
+        return root;
+    }
+
 }

@@ -1,4 +1,7 @@
-
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 /**
 *
@@ -26,7 +29,7 @@
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class LeetCode_297_510 {
-    public class TreeNode {
+    public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
@@ -36,14 +39,57 @@ public class LeetCode_297_510 {
         }
     }
 
+    public static void main(String[] args) {
+        LeetCode_297_510.TreeNode root = new LeetCode_297_510.TreeNode(1);
+        root.left = new LeetCode_297_510.TreeNode(2);
+        root.right = new LeetCode_297_510.TreeNode(3);
+        root.right.left = new LeetCode_297_510.TreeNode(4);
+        root.right.right = new LeetCode_297_510.TreeNode(5);
+        LeetCode_297_510 aa = new LeetCode_297_510();
+        String ss = aa.serialize(root);
+        System.out.println(ss);
+        LeetCode_297_510.TreeNode root1 = aa.deserialize(ss);
+        System.out.println(root1);
+    }
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
-        return null;
+        StringBuffer sb = new StringBuffer();
+        helper(root, sb);
+        return sb.toString();
+    }
+    private void helper(TreeNode node,StringBuffer s){
+        if(null == node){
+            s.append("null").append(",");
+        } else {
+            s.append(node.val).append(",");
+            helper(node.left, s);
+            helper(node.right, s);
+        }
     }
 
+    
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        return null;
+        if(null == data || 0 == data.length()){
+            return null;
+        }
+        String[] ss = data.split(",");
+        Queue<String> queue = new LinkedList<>();
+        for (int i = 0; i < ss.length; i++) {
+            queue.offer(ss[i]);
+        }
+        return helper2(queue);
+    }
+
+    public TreeNode helper2(Queue<String> queue) {
+        String s = queue.poll();
+        if("null".equals(s) || null == s || "".equals(s)){
+            return null;
+        }
+        TreeNode node = new TreeNode(Integer.parseInt(s));
+        node.left = helper2(queue);
+        node.right = helper2(queue);
+        return node;
     }
 }
 
