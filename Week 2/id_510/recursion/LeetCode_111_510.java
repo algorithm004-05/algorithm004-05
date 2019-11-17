@@ -82,7 +82,7 @@ public class LeetCode_111_510 {
 
 
      /**
-     * 中序遍历
+     * 层序遍历
      *  左右子节点都不存在
      * @param root
      * @return

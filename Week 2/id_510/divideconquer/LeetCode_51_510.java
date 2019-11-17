@@ -1,5 +1,7 @@
 
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -35,7 +37,67 @@ import java.util.List;
  */
 public class LeetCode_51_510 {
 
+    public static void main(String[] args) {
+       
+        System.out.println(new LeetCode_51_510().solveNQueens(12).size());
+    }
+
     public List<List<String>> solveNQueens(int n) {
-        return null;
+        List<List<String>> list = new ArrayList<>();
+        
+        // 定义空间结构
+        char[][] c = new char[n][n];
+        for (int i = 0; i < c.length; i++) {
+            for (int j = 0; j < c[i].length; j++) {
+                c[i][j] = '.';
+            }
+        }
+        dfs(c,0,list);
+        return list;
+    }
+
+    /**
+     * 深度遍历
+     * @param c
+     * @param clo
+     * @param list
+     */
+    private void dfs(char[][] c, int clo,List<List<String>> list){
+        // 结束
+        if (clo == c.length) {
+            List<String> l = new LinkedList<>();
+            for (int i = 0; i < c.length; i++) {
+                l.add(new String(c[i]));
+            }
+            list.add(l);
+            return;
+        }
+
+        for (int i = 0; i < c.length; i++) {
+            if(check(c, i, clo)){
+                c[i][clo] = 'Q';
+                dfs(c,clo+1,list);
+                // 回溯
+                c[i][clo] = '.';
+            }
+        }
+
+    }
+
+    private boolean check(char[][] c, int x, int y){
+        for (int i = 0; i < c.length; i++) {
+            // 遍历到y的上一列结束 
+            for (int j = 0; j < y; j++) {
+                /**
+                 * 横向 坐标轴 x == i 
+                 * 对角线 函数y = x+常量 或 y =x-常量
+                 *      x+y = i+j   x-y = i - j
+                 */
+                if(c[i][j] == 'Q' && (x == i ||( x -y == i - j )|| (x + y) ==  (i + j))){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
