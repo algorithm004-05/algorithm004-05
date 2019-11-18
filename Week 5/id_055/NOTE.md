@@ -377,3 +377,82 @@ var coinChange = function(coins, amount) {
   return dp[amount] === max ? -1 : dp[amount];
 };
 ```
+
+https://leetcode-cn.com/problems/house-robber/submissions/
+
+状态空间 升维度
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+
+// 0 表示偷 第n个房间， 1 表示不偷 第n个房间
+// dp[n][1] = Max(dp[n-1][1], dp[n-1][0])
+//  dp[n][0] = dp[n-1][1] + nums[n]
+
+var rob = function(nums) {
+  let n = nums.length;
+  if (n === 0) return 0;
+  let dp = Array.from(new Array(n), () => new Array(2));
+
+  dp[0][1] = 0;
+  dp[0][0] = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0]);
+    dp[i][0] = dp[i - 1][1] + nums[i];
+  }
+
+  return Math.max(dp[n - 1][1], dp[n - 1][0]);
+};
+```
+
+https://leetcode-cn.com/problems/house-robber-ii/submissions/
+
+解法
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+
+// 0 表示偷 第n个房间， 1 表示不偷 第n个房间
+
+// dp[n][1] = Max(dp[n-1][1], dp[n-1][0])
+// dp[n][0] = dp[n-1][1] + nums[n]
+
+// 因为是头尾连接，分为两段 0~n-2 和 1~n-1, 和 https://leetcode-cn.com/problems/house-robber/submissions/ 就一样了
+
+var rob = function(nums) {
+  let n = nums.length;
+
+  if (n === 0) return 0;
+  if (n === 1) return nums[0];
+
+  let dp1 = Array.from(new Array(n - 1), () => new Array(2));
+  let dp2 = Array.from(new Array(n), () => new Array(2));
+
+  // 0 到 n-2
+  dp1[0][1] = 0;
+  dp1[0][0] = nums[0];
+
+  for (let i = 1; i < n - 1; i++) {
+    dp1[i][1] = Math.max(dp1[i - 1][1], dp1[i - 1][0]);
+    dp1[i][0] = dp1[i - 1][1] + nums[i];
+  }
+
+  // 1 到 n-1
+  dp2[1][1] = 0;
+  dp2[1][0] = nums[1];
+
+  for (let i = 2; i < n; i++) {
+    dp2[i][1] = Math.max(dp2[i - 1][1], dp2[i - 1][0]);
+    dp2[i][0] = dp2[i - 1][1] + nums[i];
+  }
+
+  return Math.max(dp1[n - 2][1], dp1[n - 2][0], dp2[n - 1][1], dp2[n - 1][0]);
+};
+```
