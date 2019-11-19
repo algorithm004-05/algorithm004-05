@@ -5,6 +5,7 @@
  */
 
 /**
+ * 第一种解法，时间复杂度O(n)
  * @param Integer[] $nums
  * @return NULL
  */
@@ -20,5 +21,23 @@ function moveZeroes(&$nums) {
             $nums[$zeroIndex] = $tmp;
             $zeroIndex++;
         }
+    }
+}
+
+/**
+ * 第二种解法，使用两个下标指针，时间复杂度O(n),元素移动次数更少
+ * @param Integer[] $nums
+ * @return NULL
+ */
+function moveZeroes2(&$nums) {
+    $i = 0;
+    for ($j = 0; $j < count($nums); $j++) {
+        if ($nums[$j] != 0) {
+            $nums[$i] = $nums[$j];
+            $i++;
+        }
+    }
+    for ($k = $i; $k < count($nums); $k++) {
+        $nums[$k] = 0;           
     }
 }
