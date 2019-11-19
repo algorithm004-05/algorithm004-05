@@ -12,8 +12,11 @@ class Solution:
                 k += 1
         return k
 
+    def removeDuplicates2(self, nums: List[int]) -> int:
+        pass
+
 
 if __name__ == '__main__':
     s = Solution()
     a = [1, 1, 2]
-    print(s.removeDuplicates(a))
+    print(s.removeDuplicates2(a))
