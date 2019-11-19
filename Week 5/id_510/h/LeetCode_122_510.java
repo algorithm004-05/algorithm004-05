@@ -1,7 +1,9 @@
-import java.util.Queue;
+package algorithm00405test.week4.lesson.todo.h;
+
+
 
 /**
- *  给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+ *给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
  *
  * 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
  *
@@ -31,22 +33,8 @@ import java.util.Queue;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class LeetCode_122_510 {
-
-    public static void main(String[] args) {
-        LeetCode_122_510 t = new LeetCode_122_510();
-        int[] prices = new int[]{7,1,10,15,6,4};
-        int[] prices1 = new int[]{7,6,4,3,1};
-        System.out.println(t.maxProfit(prices));
-    }
     public int maxProfit(int[] prices) {
-        int max = 0;
-        int temp = 0;
-        for (int i = 1; i < prices.length-1; i++) {  
-            temp = prices[i] - prices[i-1];
-            if(temp > 0){
-                max += temp;
-            }         
-        }
-        return max;
+        return 0;
     }
+
 }

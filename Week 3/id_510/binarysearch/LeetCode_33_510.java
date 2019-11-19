@@ -1,4 +1,3 @@
-package algorithm00405test.week3.lesson.todo.binarysearch;
 
 
 
@@ -69,8 +68,4 @@ public class LeetCode_33_510 {
         }
         return -1;
     }
-
-
-    
-
 }

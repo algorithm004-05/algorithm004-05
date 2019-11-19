@@ -1,4 +1,3 @@
-package algorithm00405test.week3.lesson.todo.binarysearch;
 
 
 /**
@@ -25,7 +24,36 @@ package algorithm00405test.week3.lesson.todo.binarysearch;
  */
 public class LeetCode_367_510 {
 
+    public static void main(String[] args) {
+        LeetCode_367_510 t = new LeetCode_367_510();
+        System.out.println(t.isPerfectSquare(1));
+    }
+
+    /**
+     * 
+     * @param num
+     * @return
+     */
     public boolean isPerfectSquare(int num) {
+        if(num < 0){
+            return false;
+        }
+        if(num <= 1){
+            return true;
+        }
+        int left = 0,right = num,mid = 0;
+        while(left < right){
+             mid = left + ((right - left)>>1);
+            if(mid >= num/mid){
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        
+        if(left == num/left && 0 == num%left){
+            return true;
+        }
         return false;
     }
 }
