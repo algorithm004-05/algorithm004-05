@@ -848,3 +848,90 @@ var isValidSudoku = function(board) {
 ```
 
 https://leetcode-cn.com/problems/sudoku-solver/#/description
+
+```js
+/**
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+
+const getBoxIndex = (row, col) =>  Math.floor(row/3)*3 + Math.floor(col/3)
+
+var solveSudoku = function(board) {
+    let rows = new Map(), cols = new Map(), boxes = new Map()
+
+    for (let i=0; i<9; i++) {
+        rows.set(i, new Set())
+        cols.set(i, new Set())
+        boxes.set(i, new Set())
+    }
+
+    let empty = []
+
+    for (let i=0; i<9; i++) {
+        for (let j=0; j<9; j++) {
+            if (board[i][j] !== '.') {
+                let rowSet = rows.get(i)
+                let colSet = cols.get(j)
+                let boxIndex = getBoxIndex(i, j)
+                let boxSet = boxes.get(boxIndex)
+                
+                rowSet.add(board[i][j])
+                colSet.add(board[i][j])
+                boxSet.add(board[i][j])
+
+                rows.set(i, rowSet)
+                cols.set(j, colSet)
+                boxes.set(boxIndex, boxSet)
+            } else {
+                empty.push({row: i, col: j})
+            }
+        }
+    }
+
+    // 回溯
+    function helper(n, level) {
+        // 递归终止条件
+        if (level >= n) {
+            return true
+        }
+
+        let {row, col} = empty[level]
+        let rowSet = rows.get(row)
+        let colSet = cols.get(col)
+        let boxIndex = getBoxIndex(row, col)
+        let boxSet = boxes.get(boxIndex)
+
+        for (let i=1; i<=9; i++) {
+            let number = i + ''
+            if (!rowSet.has(number) && !colSet.has(number) && !boxSet.has(number)) {
+
+                rowSet.add(number)
+                colSet.add(number)
+                boxSet.add(number)
+
+                board[row][col] = number
+                
+                if (!helper(n, level+1)) {
+
+                    rowSet.delete(number)
+                    colSet.delete(number)
+                    boxSet.delete(number)
+
+                    board[row][col] = '.'
+
+                    rows.set(row, rowSet)
+                    cols.set(col, colSet)
+                    boxes.set(boxIndex, boxSet)
+                } else {
+                    return true
+                }
+            }
+        }
+
+        return false
+    }
+
+    helper(empty.length, 0)
+};
+```
