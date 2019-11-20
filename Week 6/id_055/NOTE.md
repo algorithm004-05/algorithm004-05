@@ -607,3 +607,244 @@ var solve = function(board) {
   }
 };
 ```
+
+## 第 8 课 高级搜索
+
+剪枝, 双向 BFS 和 启发式搜索
+
+初级搜索
+
+1. 朴素搜索
+2. 优化方式：不重复（fibonacci），剪枝（生成括号问题）
+3. 搜索方向：DFS，BFS，双向搜索（起点和终点分别做 BFS，直到相遇）和启发式搜索（使用优先队列）
+
+https://leetcode-cn.com/problems/climbing-stairs/
+
+傻递归 超时
+
+```js
+var climbStairs = function(n) {
+  if (n <= 2) {
+    return n;
+  }
+
+  return climbStairs(n - 1) + climbStairs(n - 2);
+};
+```
+
+记忆化
+
+```js
+let memory = [];
+
+var climbStairs = function(n) {
+  if (n <= 2) {
+    return n;
+  }
+
+  if (!memory[n]) {
+    memory[n] = climbStairs(n - 1) + climbStairs(n - 2);
+  }
+
+  return memory[n];
+};
+```
+
+```js
+/**
+ * dp[n] = dp[n-1] + dp[n-2]
+ */
+
+var climbStairs = function(n) {
+  if (n <= 2) {
+    return n;
+  }
+
+  let f1 = 1,
+    f2 = 2,
+    f3;
+
+  for (let i = 3; i <= n; i++) {
+    f3 = f1 + f2;
+    f1 = f2;
+    f2 = f3;
+  }
+
+  return f2;
+};
+```
+
+https://leetcode-cn.com/problems/generate-parentheses/
+
+```js
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
+// DFS
+var generateParenthesis = function(n) {
+  let res = [];
+
+  function helper(left, right, n, level, str) {
+    // 终止条件
+    if (left === n && right === n) {
+      res.push(str);
+      return;
+    }
+
+    if (left <= n) helper(left + 1, right, n, level + 1, str + '(');
+    if (left > right) helper(left, right + 1, n, level + 1, str + ')');
+  }
+
+  helper(0, 0, n, 0, '');
+
+  return res;
+};
+```
+
+BFS
+
+```js
+var generateParenthesis = function(n) {
+  let res = [];
+  let queue = [{ s: '', left: 0, right: 0 }];
+  while (queue.length !== 0) {
+    let node = queue.shift();
+    let { s, left, right } = node;
+
+    if (left === n && right === n) {
+      res.push(s);
+    }
+
+    if (left < n) {
+      queue.push({ s: s + '(', left: left + 1, right });
+    }
+    if (right < left) {
+      queue.push({ s: s + ')', left, right: right + 1 });
+    }
+  }
+
+  return res;
+};
+```
+
+https://leetcode-cn.com/problems/n-queens
+
+```js
+/**
+ * @param {number} n
+ * @return {string[][]}
+ */
+var solveNQueens = function(n) {
+  let rows = [],
+    cols = new Set(),
+    pie = new Set(),
+    na = new Set(),
+    res = [];
+
+  function helper(row, n, currentState) {
+    if (row >= n) {
+      res.push(currentState);
+      return;
+    }
+
+    for (let col = 0; col < n; col++) {
+      if (cols.has(col) || pie.has(col + row) || na.has(col - row)) {
+        continue;
+      }
+
+      cols.add(col);
+      pie.add(col + row);
+      na.add(col - row);
+
+      helper(row + 1, n, [...currentState, col]);
+
+      cols.delete(col);
+      pie.delete(col + row);
+      na.delete(col - row);
+    }
+  }
+
+  helper(0, n, []);
+
+  let tmps = [];
+  for (let i = 0; i < res.length; i++) {
+    let tmp = [];
+    for (let j = 0; j < res[i].length; j++) {
+      tmp.push(
+        new Array(res[i].length)
+          .fill('.')
+          .fill('Q', res[i][j], res[i][j] + 1)
+          .join('')
+      );
+    }
+    tmps.push(tmp);
+  }
+
+  return tmps;
+};
+```
+
+https://leetcode-cn.com/problems/valid-sudoku/description/
+
+```js
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function(board) {
+  let n = board.length;
+  // <number(行号), set<number(数字)>>
+  let rows = new Map(),
+    cols = new Map(),
+    boxes = new Map();
+
+  for (let row = 0; row < n; row++) {
+    for (let col = 0; col < n; col++) {
+      if (board[row][col] === '.') continue;
+
+      let boxIndex = Math.floor(row / 3) * 3 + Math.floor(col / 3);
+
+      if (!boxes.has(boxIndex)) {
+        boxes.set(boxIndex, new Set([board[row][col]]));
+      } else {
+        let set = boxes.get(boxIndex);
+        if (set.has(board[row][col])) {
+          return false;
+        } else {
+          set.add(board[row][col]);
+          boxes.set(boxIndex, set);
+        }
+      }
+
+      if (!rows.has(row)) {
+        rows.set(row, new Set([board[row][col]]));
+      } else {
+        let set = rows.get(row);
+        if (set.has(board[row][col])) {
+          return false;
+        } else {
+          set.add(board[row][col]);
+          rows.set(row, set);
+        }
+      }
+
+      if (!cols.has(col)) {
+        cols.set(col, new Set([board[row][col]]));
+      } else {
+        let set = cols.get(col);
+        if (set.has(board[row][col])) {
+          return false;
+        } else {
+          set.add(board[row][col]);
+          cols.set(col, set);
+        }
+      }
+    }
+  }
+
+  return true;
+};
+```
+
+https://leetcode-cn.com/problems/sudoku-solver/#/description
