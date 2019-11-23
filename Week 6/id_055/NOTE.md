@@ -978,3 +978,99 @@ var ladderLength = function(beginWord, endWord, wordList) {
   return 0;
 };
 ```
+
+启发式搜索
+
+```js
+function AstarSearch(graph, start, end) {
+
+  // 优先队列
+  let pq = collections.priority_queue() # 优先级 —> 估价函数
+  let visited = new Set()
+  pq.push(start)
+  visited.add(start)
+
+  while(pq.size !== 0) {
+    let node = pq.shift() // 出队列时，是经过评估的最优元素
+    visited.add(node)
+
+    // 处理
+    process(node)
+
+    nodes = generate_related_nodes(node)
+
+    // 未被访问的 node. 这段是 python 代码
+    unvisited = [node for node in nodes if node not in visited]
+
+    pq.push(unvisited)
+  }
+}
+```
+
+https://leetcode-cn.com/problems/shortest-path-in-binary-matrix/
+
+```js
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+
+// BFS 超时了 伤心,
+var shortestPathBinaryMatrix = function(grid) {
+  let len = grid.length;
+
+  if (grid[0][0] === 1 || grid[len - 1][len - 1] === 1) return -1;
+
+  let visited = new Set();
+  visited.add(`00`);
+
+  let q = [{ row: 0, col: 0, visited }],
+    min = Number.MAX_SAFE_INTEGER;
+
+  let dx = [0, 0, 1, -1, 1, -1, 1, -1];
+  let dy = [1, -1, 0, 0, -1, 1, 1, -1];
+
+  while (q.length !== 0) {
+    let size = q.length;
+
+    for (let k = 0; k < size; k++) {
+      // 可以走八个方向
+      let { row, col, visited } = q.shift();
+
+      if (
+        row === len - 1 &&
+        col === len - 1 &&
+        visited.has(`${len - 1}${len - 1}`)
+      ) {
+        min = Math.min(min, visited.size);
+      }
+
+      for (let i = 0; i < 8; i++) {
+        let mark = `${row + dx[i]}${col + dy[i]}`;
+        if (
+          row + dx[i] < len &&
+          row + dx[i] >= 0 &&
+          col + dy[i] < len &&
+          col + dy[i] >= 0 &&
+          grid[row + dx[i]][col + dy[i]] === 0 &&
+          !visited.has(mark)
+        ) {
+          visited.add(mark);
+          q.push({
+            row: row + dx[i],
+            col: col + dy[i],
+            visited: new Set(visited)
+          });
+          visited.delete(mark);
+        }
+      }
+    }
+  }
+
+  return min === Number.MAX_SAFE_INTEGER ? -1 : min;
+};
+```
+
+https://leetcode-cn.com/problems/sliding-puzzle/
+
+https://leetcode-cn.com/problems/sudoku-solver/
