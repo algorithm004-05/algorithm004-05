@@ -4,27 +4,27 @@ public:
         if (board.size() == 0) {
             return ;
         }
-        doSolve(board, 0, 0);
+        doSolve(board);
     }
 
-    bool doSolve(vector<vector<char>> &board, int i, int j)
+    bool doSolve(vector<vector<char>>& board)
     {
-        if (i == 9)
-            return true;
-        if (j == 9)
-            return doSolve(board, i+1, 0);
-        if (board[i][j] != '.')
-            return doSolve(board, i, j+1);
-
-        for (char c = '1'; c <= '9'; c++) {
-            if (isValid(board, i, j, c)) {
-                board[i][j] = c;
-                if (doSolve(board, i, j+1))
-                    return true;
-                board[i][j] = '.';
+        for (int i = 0; i < board.size(); i++){
+            for (int j = 0; j < board[0].size(); j++) {
+                if (board[i][j] == '.'){
+                    for (char k = '1'; k <= '9'; k++) {
+                        if (isValid(board, i, j, k)) {
+                            board[i][j] = k;
+                            if(doSolve(board))
+                                return true;
+                            board[i][j] = '.';
+                        }
+                    }
+                    return false;
+                }
             }
         }
-        return false;
+        return true;
     }
 
     bool isValid(vector<vector<char>>& board, int row, int col, char c)
