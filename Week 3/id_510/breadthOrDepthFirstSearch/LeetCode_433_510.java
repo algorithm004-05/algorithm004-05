@@ -1,5 +1,11 @@
-package algorithm00405test.week3.lesson.todo.breadthOrDepthFirstSearch;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Set;
 
+import javax.management.Query;
 
 /**
  * 一条基因序列由一个带有8个字符的字符串表示，其中每个字符都属于 "A", "C", "G", "T"中的任意一个。
@@ -10,7 +16,9 @@ package algorithm00405test.week3.lesson.todo.breadthOrDepthFirstSearch;
  *
  * 与此同时，每一次基因变化的结果，都需要是一个合法的基因串，即该结果属于一个基因库。
  *
- * 现在给定3个参数 — start, end, bank，分别代表起始基因序列，目标基因序列及基因库，请找出能够使起始基因序列变化为目标基因序列所需的最少变化次数。如果无法实现目标变化，请返回 -1。
+ * 现在给定3个参数 — start, end, bank，分别代表起始基因序列，目标基因序列及基因库，
+ * 请找出能够使起始基因序列变化为目标基因序列所需的最少变化次数。
+ * 如果无法实现目标变化，请返回 -1。
  *
  * 注意:
  *
@@ -45,7 +53,21 @@ package algorithm00405test.week3.lesson.todo.breadthOrDepthFirstSearch;
  */
 public class LeetCode_433_510 {
 
+    public static void main(String[] args) {
+        new LeetCode_433_510().minMutation("AACCGGTT", "AAACGGTA", new String[]{"AACCGGTA", "AACCGCTA", "AAACGGTA"});
+    }
     public int minMutation(String start, String end, String[] bank) {
+        if(start.length() != end.length()){
+            return -1;
+        }
+        // 标记要变化的序列
+
+    
+       List<String> list = new ArrayList<>();
+       
+       
         return 0;
     }
+
+    
 }
