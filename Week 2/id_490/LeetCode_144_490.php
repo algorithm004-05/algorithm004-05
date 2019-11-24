@@ -17,15 +17,8 @@ function preorderTraversal($root) {
 }
 
 function traversal($root, &$res) {
-    if ($root == null) {
-        return;
-    }
+    if ($root == null) return;
     $res[] = $root->val;
-    if ($root->left != null) {
-        traversal($root->left, $res);
-    }
-    
-    if ($root->right != null) {
-        traversal($root->right, $res);
-    }
+    traversal($root->left, $res);
+    traversal($root->right, $res); 
 }
