@@ -1,6 +1,3 @@
-
-
-
 ##
  #给定一个非负整数数组，你最初位于数组的第一个位置。
  #
@@ -22,4 +19,10 @@
  # 链接：https://leetcode-cn.com/problems/jump-game-ii
  # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  #/
-class LeetCode_45_510:
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        
+        pass
+
+
+print(Solution().jump([2,3,1,1,4]))

@@ -1,7 +1,4 @@
-
-
-
-/##
+##
  #给定两个单词 word1 和 word2，计算出将 word1 转换成 word2 所使用的最少操作数 。
  #
  # 你可以对一个单词进行如下三种操作：
@@ -32,4 +29,7 @@
  # 链接：https://leetcode-cn.com/problems/edit-distance
  # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  #/
-pclass LeetCode_72_510:
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+
+        pass
