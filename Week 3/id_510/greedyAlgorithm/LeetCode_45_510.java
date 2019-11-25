@@ -1,4 +1,3 @@
-package algorithm00405test.week3.lesson.todo.greedyAlgorithm;
 
 /**
  * 

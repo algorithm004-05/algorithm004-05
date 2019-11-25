@@ -1,5 +1,4 @@
-package algorithm00405test.week3.lesson.todo.greedyAlgorithm;
-
+import java.util.Arrays;
 
 /**
  *在柠檬水摊上，每一杯柠檬水的售价为 5 美元。
@@ -51,7 +50,36 @@ package algorithm00405test.week3.lesson.todo.greedyAlgorithm;
  */
 public class LeetCode_860_510 {
 
+    public static void main(String[] args) {
+        int[] a= {5,5,5,5,20,20,5,5,5,5};
+        System.out.println(new LeetCode_860_510().lemonadeChange(a));
+    }
     public boolean lemonadeChange(int[] bills) {
-        return false;
+       // Arrays.sort(bills);
+        int[] b = new int[3];
+        for (int i = 0; i < bills.length; i++) {
+            if(b[0] < 0){
+                return false;
+            }
+            if(5 == bills[i]){
+                b[0]++;
+            } else if(10 == bills[i]){
+                b[0]--;
+                b[1]++;
+            } else if(20 == bills[i]){
+                if(0 == b[1]){
+                    b[0] -=3;
+                } else {
+                    b[0]--;
+                    b[1]--;
+                }
+            } else {
+                return false;
+            }
+        }
+        if(b[0] < 0){
+            return false;
+        }
+        return true;
     }
 }
