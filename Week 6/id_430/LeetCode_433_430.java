@@ -4,7 +4,7 @@ import java.util.Set;
 /**
  * Created by panda on 2019/11/25.
  */
-public class LeetCod_433_430 {
+public class LeetCode_433_430 {
     class Solution {
         public int minMutation(String start, String end, String[] bank) {
             Set<String> banks = new HashSet();
