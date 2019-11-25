@@ -938,7 +938,7 @@ var solveSudoku = function(board) {
 
 https://leetcode-cn.com/problems/word-ladder/submissions/
 
-双端 BFS （暂时搞不定，先写个 BFS）
+BFS （暂时搞不定，先写个 BFS）
 
 ```js
 /**
@@ -976,6 +976,63 @@ var ladderLength = function(beginWord, endWord, wordList) {
   }
 
   return 0;
+};
+```
+
+解法 2 双向BFS
+
+```js
+/**
+ * @param {string} beginWord
+ * @param {string} endWord
+ * @param {string[]} wordList
+ * @return {number}
+ */
+
+var ladderLength = function(beginWord, endWord, wordList) {
+    if(!wordList.includes(endWord)) return 0
+
+    let sq = [beginWord], eq = [endWord], count = 1
+    
+    letters = 'abcdefghijklmnopqrstuvwxyz', set = new Set(wordList)
+
+    while (sq.length !== 0) {
+
+        if (sq.length > eq.length) {
+            let tmp = sq
+            sq = eq
+            eq = tmp 
+        }
+
+        let size = sq.length
+
+        for (let k=0; k<size; k++) {
+            let word = sq.shift()
+
+            for (let i=0; i<word.length; i++) {
+                let f = word.substring(0, i)
+                let e = word.substring(i+1)
+
+                for (let j=0; j<letters.length; j++) {
+                    let newWord = f + letters[j] + e
+
+                    if (eq.includes(newWord)) {
+                        return count + 1
+                    }
+
+                    if (set.has(newWord)) {
+                        sq.push(newWord)
+                        set.delete(newWord)
+                    }
+                }
+            }
+        }
+
+        count++
+        
+    }
+
+    return 0
 };
 ```
 
@@ -1068,6 +1125,71 @@ var shortestPathBinaryMatrix = function(grid) {
   }
 
   return min === Number.MAX_SAFE_INTEGER ? -1 : min;
+};
+```
+
+双向 BFS 依然超时
+
+```js
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+
+// 双向 BFS 
+
+var find = (q, mark) => {
+   return q.filter(i => i.row === mark.row && i.col === mark.col).length !== 0
+}
+
+var shortestPathBinaryMatrix = function(grid) {
+
+    let len = grid.length
+     
+    // 起点是1 或终点是1 
+    if (grid[0][0] === 1 || grid[len-1][len-1]) return -1
+    if (len === 1 && grid[0][0] === 0) return 1
+     
+    let visited = new Set()
+    
+    let sq = [{row:0, col:0}], eq = [{row:len-1, col:len-1}], count = 1
+    
+    let dx = [0,0,1,-1,1,-1,1,-1]
+    let dy = [1,-1,0,0,-1,1,1,-1]
+
+    while (sq.length !== 0) {
+
+        if (sq.length > eq.length) {
+            [sq, eq] = [eq, sq]
+        }
+
+        let size = sq.length
+        
+        for(let k=0; k<size; k++) {
+            // 可以走八个方向
+            let {row, col} = sq.shift()
+
+            for(let i=0; i<8; i++) {
+                let mark = `${row+dx[i]}${col+dy[i]}`
+                if (row+dx[i] < len && row+dx[i] >= 0 && 
+                col+dy[i] < len && col+dy[i] >= 0 && 
+                grid[row+dx[i]][col+dy[i]] === 0 && !visited.has(mark)) {
+
+                    if (find(eq, {row: row+dx[i], col: col+dy[i]})) {
+                        return count + 1
+                    }
+
+                    visited.add(mark)
+                    sq.push({row: row+dx[i], col: col+dy[i]})
+                    visited.delete(mark)
+                }
+            }
+        }
+
+        count++
+    }
+
+    return -1
 };
 ```
 
