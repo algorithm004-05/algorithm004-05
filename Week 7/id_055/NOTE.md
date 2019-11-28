@@ -142,3 +142,61 @@ class bloomFilter {
 ```
 
 其它实现 https://github.com/bitpay/bloom-filter/blob/master/lib/filter.js
+
+### LRU
+
+HashTable + 双向链表
+
+https://leetcode-cn.com/problems/lru-cache/submissions/
+
+利用 Map 会记录添加的元素的顺序的特点
+
+```js
+/**
+ * @param {number} capacity
+ */
+var LRUCache = function(capacity) {
+    this.capacity = capacity
+    this.map = new Map()
+};
+
+/** 
+ * @param {number} key
+ * @return {number}
+ */
+LRUCache.prototype.get = function(key) {
+    if (this.map.has(key)) {
+        const value = this.map.get(key)
+        this.map.delete(key)
+        this.map.set(key, value)  
+        return value
+    } else {
+        return -1
+    }
+   
+};
+
+/** 
+ * @param {number} key 
+ * @param {number} value
+ * @return {void}
+ */
+LRUCache.prototype.put = function(key, value) {
+    if (this.map.has(key)) {
+        this.map.delete(key)
+    } else {
+        if (this.map.size === this.capacity) {
+            let iterator = this.map.keys();
+            this.map.delete(iterator.next().value)
+        }
+    }
+    this.map.set(key, value)
+};
+
+/** 
+ * Your LRUCache object will be instantiated and called as such:
+ * var obj = new LRUCache(capacity)
+ * var param_1 = obj.get(key)
+ * obj.put(key,value)
+ */
+```
