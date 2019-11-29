@@ -88,6 +88,8 @@ https://leetcode-cn.com/problems/counting-bits/description/
 
 ### Bloom filter
 
+https://llimllib.github.io/bloomfilter-tutorial/zh_CN/
+
 https://www.youtube.com/watch?v=zWPsH1Aw4Es
 
 https://www.youtube.com/watch?v=qCVHH0NtIl4
