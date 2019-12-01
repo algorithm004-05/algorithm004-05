@@ -1,0 +1,21 @@
+public int hammingWeight(int n) {
+    int bits = 0;
+    int mask = 1;
+    for (int i = 0; i < 32; i++) {//暴力循环
+        if ((n & mask) != 0) {
+            bits++;
+        }
+        mask <<= 1;
+    }
+    return bits;
+}
+
+public int hammingWeight(int n) {
+    int sum = 0;
+    while (n != 0) {
+        sum++;
+        n &= (n - 1);//将 n 和 n - 1 与运算总是能把 n 中最低位的 11变成 0，并保持其他位不变。
+    }
+    return sum;
+}
+
