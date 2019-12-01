@@ -47,39 +47,56 @@ import java.util.*;
 public class LeetCode_433_105 {
 
 
-        /**
-         * 1）start 和 end 比较，有几个位置不一样。如果没有不一样的地方，则替换成功
-         如果有不一样的位置，则记录该位置。
-         2）start变化一位后，基因库中是否存在 ，如果存在。则继续下一步。
-         不存在，返回。
-         */
+    int min = Integer.MAX_VALUE;
 
+    public int minMutation(String start, String end, String[] bank) {
 
-        public int minMutation(String start, String end, String[] bank) {
+        if (start.equals(end)) return 0;
+        if (bank == null || bank.length == 0) return -1;
 
-            Map<Integer,Character> difPos = new HashMap<Integer,Character>();
-            int times = 0;
-            for ( int i = 0 ; i < start.length() ; i++) {
-                if (start.charAt(i) ==end.charAt(i)) {
-                    continue;
-                }
-                difPos.put(i, end.charAt(i));
-                StringBuilder sb = new StringBuilder(start);
-                sb.setCharAt(i, end.charAt(i));
-                String newStr =  sb.toString();
-                for(String b : bank){
-                    if (b.equals(newStr)){
-                        start = newStr;
-                        times++;
+        min = Integer.MAX_VALUE;
+        Map<String, Boolean> map = new HashMap<>();
+
+        Set<String> set = new HashSet<>();
+        for (int i = 0; i < bank.length; i++) {
+            set.add(bank[i]);
+        }
+        convert(set, start, end, Integer.MAX_VALUE, 0, map);
+        return min == Integer.MAX_VALUE ? -1 : min;
+    }
+
+    private void convert(Set<String> set, String start, String end, int maxLevel, int level, Map<String, Boolean> map) {
+        if (start.equals(end)) {
+            min = Math.min(maxLevel, level);
+            return;
+        }
+
+        Iterator<String> iterator = set.iterator();
+        while (iterator.hasNext()) {
+            String tmpBank = iterator.next();
+            int diff = 0;
+            for (int i = 0; i < tmpBank.length(); i++) {
+                if (start.charAt(i) != tmpBank.charAt(i)) {
+                    diff++;
+                    if (diff > 1) {
                         break;
                     }
                 }
             }
-            return times;
+            if (diff == 1 && !map.containsKey(tmpBank)) {
+                map.put(tmpBank, true);
+                convert(set, tmpBank, end, maxLevel, level + 1, map);
+                map.remove(tmpBank);
+            }
         }
+    }
 
     public static void main(String[] args) {
-        System.out.println("aaaaaa".replaceFirst("a","c"));
 
+        LeetCode_433_105 l = new LeetCode_433_105();
+        System.out.println(l.minMutation("AACCGGTT", "AACCGGTA", new String[]{"AACCGGTA"}));
+        System.out.println(l.minMutation("AACCGGTT", "AAACGGTA", new String[]{"AACCGGTA", "AACCGCTA", "AAACGGTA"}));
+        System.out.println(l.minMutation("AAAAACCC", "AACCCCCC", new String[]{"AAAACCCC", "AAACCCCC", "AACCCCCC"}));
+        System.out.println(l.minMutation("AACCTTGG", "AATTCCGG", new String[]{"AATTCCGG","AACCTGGG","AACCCCGG","AACCTACC"}));
     }
 }

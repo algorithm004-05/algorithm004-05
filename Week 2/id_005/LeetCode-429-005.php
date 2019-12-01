@@ -28,9 +28,7 @@ class Solution
         if (is_null($root)) {
             return $this->values;
         }
-        if (!isset($this->values[$this->level])) {
-            $this->values[$this->level] = [];
-        }
+
         $this->values[$this->level][] = $root->val;
         foreach ($root->children as $child) {
             $this->level++;
