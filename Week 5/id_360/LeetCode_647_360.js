@@ -37,4 +37,4 @@ var countSubstrings = function (s) {
 // c                    true    0       true    0    
 // d                            true    0       0    
 // c                                    true    0    
-// e                                           true 
+// e                                           true
