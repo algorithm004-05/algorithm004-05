@@ -89,7 +89,7 @@ AbstractQueue （impl Serializable）--> AbstractCollection (impl Queue) --> Col
 1. 默认长度为11
    private static final int DEFAULT_INITIAL_CAPACITY = 11;
    public PriorityQueue() { this(DEFAULT_INITIAL_CAPACITY, null); }
-3. 扩容策略：size < 64 ? (size + 2) : (size * 2)
+3. 扩容策略：size < 64 ? size + (size + 2) : size + (size * 1/2)
    最大size：MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
    如果扩容size > MAX_ARRAY_SIZE, return oldSize + 1 , 如果没有超出MAX_ARRAY_SIZE的话
 2. 默认排序按字典表顺序进行排序

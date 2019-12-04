@@ -1,7 +1,7 @@
 <?php
+
 class Solution
 {
-
     /**
      * 看题解的方式：环状替换
      * 算法复杂度 O(n)
