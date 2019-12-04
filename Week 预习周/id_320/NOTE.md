@@ -410,3 +410,97 @@ AVL 树在只要出现不平衡的节点时就会进行平衡操作。平衡操�
 3. 每个叶节点(NIL 节点，空节点) 是黑色
 4. 不能有相邻接的两个红色节点
 5. 从任一节点到其每个叶子节点的所有路径都包含相同数目的黑色节点
+
+
+
+## Week 07 学习总结
+
+#### 位运算
+
+##### 异或
+- x ^ 0 = x
+- x ^ 1s = ~x // 注意 1s = ~0
+- x ^ (~x) = 1s
+- x ^ x = 0
+- c = a ^ b => a ^ c = b, b ^ c = a // 交换两个数
+- a ^ b ^ c = a ^ (b ^ c) = (a ^ b) ^ c // associative
+
+##### 指定位置的位运算
+- 将 x 最右边的 n 位清零：x & (~0 << n)
+- 获取 x 的第 n 位值（0 或者 1）： (x >> n) & 1
+- 获取 x 的第 n 位的幂值：x & (1 << (n -1))
+- 仅将第 n 位置为 1：x | (1 << n)
+- 仅将第 n 位置为 0：x & (~ (1 << n))
+- 将 x 最高位至第 n 位（含）清零：x & ((1 << n) - 1)
+- 将第 n 位至第 0 位（含）清零：x & (~ ((1 << (n + 1)) - 1))
+
+#####  实战位运算要点
+- 判断奇偶：
+  x % 2 == 1 —> (x & 1) == 1
+  x % 2 == 0 —> (x & 1) == 0
+- x >> 1 —> x / 2
+  即： x = x / 2; —> x = x >> 1;
+  mid = (left + right) / 2; —> mid = (left + right) >> 1;
+- X = X & (X-1) 清零最低位的 1
+- X & -X => 得到最低位的 1
+- X & ~X => 0
+
+####  LRU Cache（Java实现）
+
+
+```java
+	public class LRUCache extends LinkedHashMap<Integer, Integer> {
+
+        private int capacity;
+
+        public LRUCache(int capacity) {
+            super(capacity, 0.75F, true);
+            this.capacity = capacity;
+        }
+
+        public int get(int key) {
+            return super.getOrDefault(key, -1);
+        }
+
+        public void put(int key, int value) {
+            super.put(key, value);
+        }
+
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+            return size() > capacity;
+        }
+    }
+
+```
+
+#### 归并排序 （ Java 实现）
+
+```java
+public void mergeSort(int[] array, int left, int right) {
+    if (right <= left) return;
+    int mid = (left + right) >> 1; // (left + right) / 2
+    
+    mergeSort(array, left, mid);
+    mergeSort(array, mid + 1, right);
+    merge(array, left, mid, right);
+}
+
+public void merge(int[] arr, int left, int mid, int right) {
+	int[] temp = new int[right - left + 1]; // 中间数组
+	int i = left, j = mid + 1, k = 0;
+
+	while (i <= mid && j <= right) {
+		temp[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
+	}
+	
+	while (i <= mid) temp[k++] = arr[i++];
+	while (j <= right) temp[k++] = arr[j++];
+
+	for (int p = 0; p < temp.length; p++) {
+		arr[left + p] = temp[p];
+	}
+	// 也可以⽤ System.arraycopy(a, start1, b, start2, length)
+}
+```
+
