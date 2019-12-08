@@ -24,6 +24,9 @@ public class LeetCode_22_105 {
             generate(left, right + 1, n, s + ")", result);
     }
 
+
+
+
     public static void main(String[] args) {
         LeetCode_22_105 leetCode_22_105 = new LeetCode_22_105();
         leetCode_22_105.generateParenthesis(3);
