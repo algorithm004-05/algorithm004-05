@@ -1,5 +1,5 @@
-package algorithm00405test.week3.lesson.todo.greedyAlgorithm;
-
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 机器人在一个无限大小的网格上行走，从点 (0, 0) 处开始出发，面向北方。该机器人可以接收以下三种类型的命令：
@@ -42,8 +42,38 @@ package algorithm00405test.week3.lesson.todo.greedyAlgorithm;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class LeetCode_874_510 {
+    public static void main(String[] args) {
+        System.out.println(new LeetCode_874_510().robotSim(new int[]{4,-1,4,-2,4},new int[][] {{2,4}}));
+    }
 
     public int robotSim(int[] commands, int[][] obstacles) {
-        return 0;
+        int[][] dir = {{0,1},{1,0},{0,-1},{-1,0}}; //右 下 左 上
+        int index = 0,x = 0,y = 0,max = 0,nextX=0,nextY=0;
+        Set<String> set = new HashSet<>();
+        for (int[] is : obstacles) {
+            set.add(is[0] +"-" +is[1]);
+        }
+        for (int i = 0;i < commands.length;i++) {
+            if(commands[i] >= 1 && commands[i] <=9){
+                for (int j = 0; j < commands[i]; j++) {
+                    nextX = x + dir[index][0];
+                    nextY = y + dir[index][1];
+                    if(set.contains(nextX +"-" + nextY)){
+                        break;
+                    }
+                    x= nextX;
+                    y= nextY;
+                }
+                max = Math.max(max, x*x + y* y);
+            } else if(commands[i] == -1){
+                index = (index+1)%4; 
+            } else  if(commands[i] == -2){
+                //dir0 = (dir0-1+ 4)%4;
+                index = (index+3)%4; 
+            } else {
+                return 0;
+            }
+        }
+        return max;
     }
 }
