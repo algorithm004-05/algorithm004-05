@@ -1,0 +1,30 @@
+class Solution {
+    public int[] plusOne(int[] digits) {
+        /**从高位开始一次计算，是否需要进位*/
+        if (digits.length == 0 || digits == null)
+            return digits;
+        int jinwei = 1;
+        if (digits[digits.length-1] + 1 == 10) {
+            for (int i = digits.length - 1; i >= 0; i--) {
+                if (digits[i]  + jinwei == 10) {
+                    jinwei = 1;
+                    digits[i] = 0;
+                } else {
+
+                    digits[i] = digits[i] + jinwei;
+                    jinwei = 0;
+                }
+            }
+            if (jinwei == 1) {
+                int[] result = new int[digits.length + 1];
+                result[0] = jinwei;
+
+                return result;
+            }
+        }else {
+            digits[digits.length-1] = digits[digits.length-1] +1;
+        }
+
+        return digits;
+    }
+}
