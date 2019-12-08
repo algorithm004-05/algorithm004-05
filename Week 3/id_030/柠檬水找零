@@ -1,0 +1,29 @@
+正常购物思路
+收到5记录，收到10 找5（5个个数大于1），收到20 找10或者5（5>3 或者 10>1 && 5>1）
+class Solution {
+    public boolean lemonadeChange(int[] bills) {
+        int five = 0, ten = 0;
+        for (int bill: bills) {
+            if (bill == 5)
+                five++;
+            else if (bill == 10) {
+                if (five == 0) return false;
+                five--;
+                ten++;
+            } else {
+                if (five > 0 && ten > 0) {
+                    five--;
+                    ten--;
+                } else if (five >= 3) {
+                    five -= 3;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+}
+想了下别的思路 维护3个哈希表 或者使用 贪心算法 核心逻辑 都类似
+基本上都是有10块的 先找回10 然后找5
