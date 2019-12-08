@@ -1,0 +1,18 @@
+思路
+每次跳到最远直到能够条到最后一个位置
+
+//代码看了国际站
+class Solution {
+    public int jump(int[] nums) {     
+       int times = 0, start = 0, fast = 0;//初始化跳跃次数，每次跳跃的起始位置，能够跳跃的最远距离
+	   for (int i = 0; i < nums.length - 1; i++) {//循环数组
+		   fast = Math.max(fast, i + nums[i]);//取得每次跳跃的最远位置 其中i+nums[i]表示从当前位置能够跳跃到的最远位置
+       
+		   if (i == start) {//当前位置为起跳位置
+			    times++;
+			    start = fast;//如果最远的距离能够到达最后一个位置则不会再有起跳的机会
+		   }
+	   }
+	    return times;
+    }
+}

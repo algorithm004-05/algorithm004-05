@@ -1,0 +1,46 @@
+/**
+ * @param {string} beginWord
+ * @param {string} endWord
+ * @param {string[]} wordList
+ * @return {number}
+ */
+var ladderLength = function(beginWord, endWord, wordList) {
+    var index=wordList.indexOf(beginWord);
+    if(index!==-1)
+        wordList.splice(index,1);
+    if(wordList.length===0)
+        return 0;
+    var queue=[beginWord],
+        res=2;
+    while(queue.length!==0){
+        var len=queue.length;
+        for(var ii=0;ii<len;ii++){
+            var str=queue.shift();
+            for(var i=0;i<wordList.length;i++){
+                if(diff(str,wordList[i])){
+                    var newstr=wordList.splice(i,1)[0];
+                    i-=1;
+                    if(newstr===endWord){
+                        return res;           
+                    }else{
+                        queue.push(newstr);
+                    }
+                }
+            }
+        }
+        res+=1;
+    }
+    return 0;
+    function diff(str1,str2){
+        if(str1.length!==str2.length)
+            return false;
+        var res=0;
+        for(var i=0;i<str1.length;i++){
+            if(str1[i]!==str2[i])
+                res+=1;
+            if(res>1)
+                return false;
+        }
+        return true;
+    }
+};

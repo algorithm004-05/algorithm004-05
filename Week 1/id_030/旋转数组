@@ -1,0 +1,54 @@
+1.暴力解法：循环K次每次移动一位 嵌套循环
+2.使用双指针起始位置为0和K-1，循环前移直到k-1==0 i
+class Solution {
+    public void rotate(int[] nums, int k) {
+            
+                 while(k>0){
+                     int temp=nums[nums.length-1];
+                 for(int i=nums.length-1;i>0;i--){
+                     nums[i]=nums[i-1];
+                 }
+                 nums[0]=temp;
+                     k--;
+                 }
+             
+    }
+}
+虽然通过了 但是耗时101ms 时间复杂度0(n)吧 k*n
+3.想不出来了
+/***********************************************看了这个反转数组的方法挺有意思的******************************/
+方法 4：使用反转
+算法
+
+这个方法基于这个事实：当我们旋转数组 k 次， k\%nk%n 个尾部元素会被移动到头部，剩下的元素会被向后移动。
+
+在这个方法中，我们首先将所有元素反转。然后反转前 k 个元素，再反转后面 n-kn−k 个元素，就能得到想要的结果。
+
+假设 n=7n=7 且 k=3k=3 。
+
+原始数组                  : 1 2 3 4 5 6 7
+反转所有数字后             : 7 6 5 4 3 2 1
+反转前 k 个数字后          : 5 6 7 4 3 2 1
+反转后 n-k 个数字后        : 5 6 7 1 2 3 4 --> 结果
+Java
+public class Solution {
+    public void rotate(int[] nums, int k) {
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+    public void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+}
+复杂度分析
+
+时间复杂度：O(n)O(n) 。 nn 个元素被反转了总共 3 次。
+空间复杂度：O(1)O(1) 。 没有使用额外的空间。

@@ -1,0 +1,40 @@
+﻿我的（挫）解法：
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] returnedArray = new int[0];
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target && i != j) {
+                    returnedArray = new int[]{i, j};
+                }
+            }
+        }
+        return returnedArray;
+    }
+}
+执行用时 :83 ms, 在所有 java 提交中击败了8.41%的用户
+内存消耗 :37.2 MB, 在所有 java 提交中击败了91.40%的用户
+
+课程视频解法：
+class Solution {
+    
+    public int[] twoSum(int[] nums, int target) {
+        int[] a = new int[2];
+        int numsSize = nums.length;
+        for (int i = 0; i < numsSize - 1; i++) {
+            for (int j = i + 1; j < numsSize; j++) {
+                if(nums[i] + nums[j] ==  target) {
+                    a[0] = i;
+                    a[1] = j;
+                    return a;
+                }
+            }
+        }
+        return new int[0];
+    }
+    
+}
+执行用时 :34 ms, 在所有 java 提交中击败了47.03%的用户
+内存消耗 :37.8 MB, 在所有 java 提交中击败了82.33%的用户
+
+哈希的等听到后面再补充吧--
