@@ -1,0 +1,29 @@
+package MaxArea;
+
+public class QuestionMaxArea {
+    public static void main(String args[]) {
+        int[] nums = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+        System.out.println(maxArea1(nums));
+    }
+
+    public static int maxArea(int[] nums) {
+        int area = 0;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                area = Math.max(area, Math.min(nums[i], nums[j]) * (j - i));
+            }
+
+        }
+        return area;
+    }
+
+    public static int maxArea1(int[] nums) {
+        int maxarea = 0, l = 0, r = nums.length - 1;
+        while (l < r) {
+            maxarea = Math.max(maxarea, Math.min(nums[l], nums[r]) * (r - l));
+            if (nums[l] < nums[r]) l++;
+            else r--;
+        }
+        return maxarea;
+    }
+}
