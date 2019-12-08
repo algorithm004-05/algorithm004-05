@@ -1,0 +1,34 @@
+上周老师教的暴力循环
+class Solution {
+    
+    public int[] twoSum(int[] nums, int target) {
+      int[] result = new int[2];
+      for(int i =0 ; i<nums.length;i++){
+          for(int j=0;j<nums.length;j++){
+              if(nums[i] + nums[j] == target && i!=j){
+                result[0]=i;
+                result[1]=j;
+              }
+          }
+      } 
+      return result;
+    }
+}
+这周通过使用HashMap来降低遍历时所需要的时间复杂度
+class Solution {
+    
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer,Integer> temp=new HashMap<Integer,Integer>();
+      for(int i =0;i<nums.length;i++) {
+          temp.put(nums[i],i);
+      }
+        for(int i =0;i<nums.length;i++){
+            if(temp.containsKey(target-nums[i]) && temp.get(target-nums[i]) !=i) {
+            //需要判断返回结果1于返回结果2 不是同一个元素，自己写的时候没想到这个地方导致 返回了两个同样的结果（10=5+5  【5，8 ，9】 返回【0，0】）
+                return new int[] {i,temp.get(target-nums[i])};
+            }
+        }
+    return new int[] {};
+    }
+}
+在做题的时候 并没有使用IDE编辑器，经常报错，感觉自己基本功渣渣，继续努力通过做题磨练一下
