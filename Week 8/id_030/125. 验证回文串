@@ -1,0 +1,16 @@
+var isPalindrome = function(s) {
+     var formatStr= s.replace(/[^0-9a-zA-Z]/g,"").toLowerCase().split('');        
+        var leftIndex=0;
+        var rightIndex=formatStr.length-1;
+        while(leftIndex < rightIndex){
+            if(formatStr[leftIndex]!= formatStr[rightIndex]){                            
+               return false;
+            }
+            leftIndex++;
+            rightIndex--;
+        }
+        return true;
+};
+格式化代码 
+左右往中间校验
+时间复杂度O(n)
