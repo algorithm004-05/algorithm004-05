@@ -1,0 +1,25 @@
+逻辑是 先把数组最后一位+1，然后循环数组的元素当元素为10的时候进位
+class Solution {
+    public int[] plusOne(int[] digits) {
+       digits[digits.length-1]=digits[digits.length-1]+1;      
+       for(int i = digits.length-1;i>=0;i--){
+           if(digits[i]!=10){
+               
+           }else{
+               if(i==0){
+               //这个地方最初思考是如果这位是10 需要重新创建一个数组 然后复制 新数组第一位为1 后来自己模拟了一下只有全是9的情况才会出现进位
+               //所以这种情况只要新建一个长度+1的数组 并且第一位为1即可
+                   int[] arr =new int[digits.length +1];                   
+                   arr[0]=1;
+                   return arr;
+               }else{
+                  digits[i]=0;
+                  digits[i-1]=digits[i-1]+1;
+               }
+           }
+       }   
+        return digits;
+    }
+}
+
+
