@@ -1,0 +1,36 @@
+1.暴力：字符串转数组，排序，判断是否相等
+class Solution {
+    public boolean isAnagram(String s, String t) {
+      char[] a =s.toCharArray();
+      char[] b =t.toCharArray();  
+      Arrays.sort(a);
+      Arrays.sort(b);
+      return Arrays.equals(a,b);
+    }
+}
+2.看了题解
+首先判断两个字符串长度是否相等
+然后初始化一个26位长度的数组（代表26个字母）
+一次循环两个字符串 s字符转的字母对应数组中的位置+1；t字符转的字母对应数组中的位置-1
+其中 s.charAt(i) - 'a' 返回的值为当前字母所在数组中的索引位置 此处的char相减 实际是对应转码的数值相减
+字符全部循环完毕 判断数组内是否均为0 
+class Solution {
+   public boolean isAnagram(String s, String t) {
+    if (s.length() != t.length()) {
+        return false;
+    }
+    int[] counter = new int[26];
+    for (int i = 0; i < s.length(); i++) {
+        counter[s.charAt(i) - 'a']++;
+        counter[t.charAt(i) - 'a']--;
+    }
+    for (int count : counter) {
+        if (count != 0) {
+            return false;
+        }
+    }
+    return true;
+
+    }
+}
+第一种思路比较好想，第二种思路实际中可能跟为好用一些
