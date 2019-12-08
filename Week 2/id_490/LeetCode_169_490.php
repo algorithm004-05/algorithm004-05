@@ -25,6 +25,47 @@ function majorityElement($nums) {
     }
 }
 
+/**
+ * 第二种解法，使用分治思想
+ * @param Integer[] $nums
+ * @return Integer
+ */
+function majorityElement2($nums) {
+    majorityElementRecur($nums, 0, count($nums) - 1);
+}
+
+function majorityElementRecur(&$nums, $low, $high) {
+    // recursion teminator
+    if ($low == $high) {
+        return $nums[$low];
+    }
+    // prepare data
+    $mid = intval(($high - $low) / 2 + $low);
+        //var_dump($low, $high, $mid); if (is_float($mid)) die;
+
+    // conquer subproblems
+    $left = majorityElementRecur($nums, $low, $mid);
+    $right = majorityElementRecur($nums, $mid + 1, $high);
+    // process and generate the final result
+    if ($left == $right) {
+        return $left;
+    }
+    $leftCount = countInRange($nums, $left, $low, $high);
+    $rightCount = countInRange($nums, $right, $low, $high);
+    var_dump($leftCount, $rightCount);
+    return  $leftCount > $rightCount ? $left : $right;
+}
+
+function countInRange($nums, $majority, $low, $high) {
+    $count = 0;
+    for($i=$low; $i<=$high; $i++) {
+        if ($nums[$i] == $majority) $count++;
+    }
+    return $count;
+}
+
+
+
 $input = [2,2,1,1,1,2,2];
-$ans = majorityElement($input);
+$ans = majorityElement2($input);
 var_dump($ans);
