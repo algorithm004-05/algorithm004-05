@@ -1,0 +1,28 @@
+ public int bfs( st,  ed, HashSet<String> dic, int level) {
+
+        if (终止条件) {
+            return xxx;
+        }
+
+		// 双向判断条件
+        if (st.size() > ed.size()) {
+			// 交换收尾
+            return bfs(ed, st, dic, l);
+        }
+
+        Set<String> toAddSet = new HashSet<>();
+
+        for (String s : st) {
+
+            for (int i = 0; i < s.length(); i++) {
+
+                // 处理过程
+            }
+
+            
+        }
+		
+		// 还原本层数据
+        
+        return bfs(st, ed, dic, l + 1);
+    }
