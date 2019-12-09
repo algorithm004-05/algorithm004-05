@@ -1,0 +1,43 @@
+class Solution {
+    private List<List<String>> result = new ArrayList<>(); 
+    public List<List<String>> solveNQueens(int n) {
+        boolean[] visited = new boolean[n];
+        boolean[] diag1 = new boolean[2*n-1];
+        boolean[] diag2 =  new boolean[2*n-1];
+        helper(0, n, new ArrayList<String>(), visited, diag1, diag2);
+
+        return result;
+    }
+
+    public void helper(int level, int n, List<String> list, boolean[] visited, boolean[] diag1, boolean[] diag2) {
+        //terminator 一直下转到最后一层之后，说明说有层都找到合适的位置
+        if(level == n) {
+            result.add(new ArrayList<String>(list));
+            return;
+        }
+        //process current level
+        for(int i = 0; i < n; i++) {
+            if (visited[i] || diag1[level+i] || diag2[level-i+n-1]) {
+                continue;
+            }
+            char[] arrayChar =new char[n];
+            Arrays.fill(arrayChar,'.');
+
+            arrayChar[i] = 'Q';
+            String charString = new String(arrayChar);
+            list.add(charString);
+            visited[i] = true;
+            diag1[level+i] = true;
+            //行值-列值可能小于0，加上一个正数N-1,保证为正数，同时不会数组越界
+            diag2[level-i+n-1] = true;
+            
+            helper(level+1, n, list, visited, diag1, diag2);
+            //回到当前层，把当前层的数据清除，继续试下一个列，体现回溯
+            list.remove(list.size()-1);
+            visited[i] = false;
+            diag1[level+i] = false;
+            diag2[level-i+n-1] = false;
+        }
+
+    }
+}
