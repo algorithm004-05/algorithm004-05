@@ -1,5 +1,8 @@
-public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+# NOTE
 
+```text
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+  
        int cols = obstacleGrid[0].length;
         int[] nums = new int[cols];
         nums[0] = 1;
@@ -15,3 +18,5 @@ public int uniquePathsWithObstacles(int[][] obstacleGrid) {
 
         return nums[cols - 1];
     }
+```
+
